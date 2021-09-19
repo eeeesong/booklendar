@@ -13,6 +13,7 @@
 		E47EA14D26F75BE000E793D4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E47EA14B26F75BE000E793D4 /* Main.storyboard */; };
 		E47EA14F26F75BE200E793D4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E47EA14E26F75BE200E793D4 /* Assets.xcassets */; };
 		E47EA15226F75BE200E793D4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E47EA15026F75BE200E793D4 /* LaunchScreen.storyboard */; };
+		E47EA15F26F7630000E793D4 /* Calendar.swift in Sources */ = {isa = PBXBuildFile; fileRef = E47EA15E26F7630000E793D4 /* Calendar.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		E47EA14E26F75BE200E793D4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E47EA15126F75BE200E793D4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E47EA15326F75BE200E793D4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E47EA15E26F7630000E793D4 /* Calendar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Calendar.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +60,7 @@
 			children = (
 				E47EA15926F75C1600E793D4 /* App Cycle */,
 				E47EA15B26F75C3B00E793D4 /* View */,
+				E47EA15D26F762F000E793D4 /* Model */,
 				E47EA14E26F75BE200E793D4 /* Assets.xcassets */,
 				E47EA15326F75BE200E793D4 /* Info.plist */,
 			);
@@ -97,6 +100,14 @@
 				E47EA15026F75BE200E793D4 /* LaunchScreen.storyboard */,
 			);
 			path = Storyboard;
+			sourceTree = "<group>";
+		};
+		E47EA15D26F762F000E793D4 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				E47EA15E26F7630000E793D4 /* Calendar.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -172,6 +183,7 @@
 				E47EA14A26F75BE000E793D4 /* ViewController.swift in Sources */,
 				E47EA14626F75BE000E793D4 /* AppDelegate.swift in Sources */,
 				E47EA14826F75BE000E793D4 /* SceneDelegate.swift in Sources */,
+				E47EA15F26F7630000E793D4 /* Calendar.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
