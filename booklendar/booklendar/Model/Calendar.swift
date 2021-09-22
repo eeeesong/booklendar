@@ -8,28 +8,28 @@
 import Foundation
 
 class Calendar {
-    private var days: [Int: Day]
+    private var routines: [Int: Routine]
     
-    init(days: [Int: Day]) {
-        self.days = days
+    init(days: [Int: Routine]) {
+        self.routines = days
     }
     
     func mainBook(for dateKey: Int) -> Record? {
-        guard let day = days[dateKey] else {
+        guard let day = routines[dateKey] else {
             return nil
         }
         return day.main()
     }
     
     func allBooks(for dateKey: Int) -> [Record]? {
-        guard let day = days[dateKey] else {
+        guard let day = routines[dateKey] else {
             return nil
         }
         return day.all()
     }
 }
 
-class Day {
+class Routine {
     let date: Date
     var records: [Record]
     
