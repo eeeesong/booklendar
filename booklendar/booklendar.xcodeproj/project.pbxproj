@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E4675E9B26FB207000E6A711 /* BookStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4675E9A26FB207000E6A711 /* BookStorage.swift */; };
+		E4675E9D26FB22D200E6A711 /* Record.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4675E9C26FB22D200E6A711 /* Record.swift */; };
 		E47EA14626F75BE000E793D4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E47EA14526F75BE000E793D4 /* AppDelegate.swift */; };
 		E47EA14826F75BE000E793D4 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E47EA14726F75BE000E793D4 /* SceneDelegate.swift */; };
 		E47EA14A26F75BE000E793D4 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E47EA14926F75BE000E793D4 /* ViewController.swift */; };
@@ -17,6 +19,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		E4675E9A26FB207000E6A711 /* BookStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookStorage.swift; sourceTree = "<group>"; };
+		E4675E9C26FB22D200E6A711 /* Record.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Record.swift; sourceTree = "<group>"; };
 		E47EA14226F75BE000E793D4 /* booklendar.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = booklendar.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E47EA14526F75BE000E793D4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E47EA14726F75BE000E793D4 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -106,6 +110,8 @@
 			isa = PBXGroup;
 			children = (
 				E47EA15E26F7630000E793D4 /* Calendar.swift */,
+				E4675E9C26FB22D200E6A711 /* Record.swift */,
+				E4675E9A26FB207000E6A711 /* BookStorage.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -182,8 +188,10 @@
 			files = (
 				E47EA14A26F75BE000E793D4 /* ViewController.swift in Sources */,
 				E47EA14626F75BE000E793D4 /* AppDelegate.swift in Sources */,
+				E4675E9D26FB22D200E6A711 /* Record.swift in Sources */,
 				E47EA14826F75BE000E793D4 /* SceneDelegate.swift in Sources */,
 				E47EA15F26F7630000E793D4 /* Calendar.swift in Sources */,
+				E4675E9B26FB207000E6A711 /* BookStorage.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
