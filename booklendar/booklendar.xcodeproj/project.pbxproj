@@ -7,15 +7,26 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E4675E9B26FB207000E6A711 /* BookStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4675E9A26FB207000E6A711 /* BookStorage.swift */; };
+		E4675E9D26FB22D200E6A711 /* Record.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4675E9C26FB22D200E6A711 /* Record.swift */; };
+		E4675E9F26FC342200E6A711 /* Routine.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4675E9E26FC342200E6A711 /* Routine.swift */; };
+		E4675EA126FC343500E6A711 /* Day.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4675EA026FC343500E6A711 /* Day.swift */; };
+		E4675EA326FC6EA700E6A711 /* DateFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4675EA226FC6EA700E6A711 /* DateFormatter.swift */; };
 		E47EA14626F75BE000E793D4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E47EA14526F75BE000E793D4 /* AppDelegate.swift */; };
 		E47EA14826F75BE000E793D4 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E47EA14726F75BE000E793D4 /* SceneDelegate.swift */; };
 		E47EA14A26F75BE000E793D4 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E47EA14926F75BE000E793D4 /* ViewController.swift */; };
 		E47EA14D26F75BE000E793D4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E47EA14B26F75BE000E793D4 /* Main.storyboard */; };
 		E47EA14F26F75BE200E793D4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E47EA14E26F75BE200E793D4 /* Assets.xcassets */; };
 		E47EA15226F75BE200E793D4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E47EA15026F75BE200E793D4 /* LaunchScreen.storyboard */; };
+		E47EA15F26F7630000E793D4 /* CalendarManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E47EA15E26F7630000E793D4 /* CalendarManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		E4675E9A26FB207000E6A711 /* BookStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookStorage.swift; sourceTree = "<group>"; };
+		E4675E9C26FB22D200E6A711 /* Record.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Record.swift; sourceTree = "<group>"; };
+		E4675E9E26FC342200E6A711 /* Routine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Routine.swift; sourceTree = "<group>"; };
+		E4675EA026FC343500E6A711 /* Day.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Day.swift; sourceTree = "<group>"; };
+		E4675EA226FC6EA700E6A711 /* DateFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormatter.swift; sourceTree = "<group>"; };
 		E47EA14226F75BE000E793D4 /* booklendar.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = booklendar.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E47EA14526F75BE000E793D4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E47EA14726F75BE000E793D4 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -24,6 +35,7 @@
 		E47EA14E26F75BE200E793D4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E47EA15126F75BE200E793D4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E47EA15326F75BE200E793D4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E47EA15E26F7630000E793D4 /* CalendarManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +70,7 @@
 			children = (
 				E47EA15926F75C1600E793D4 /* App Cycle */,
 				E47EA15B26F75C3B00E793D4 /* View */,
+				E47EA15D26F762F000E793D4 /* Model */,
 				E47EA14E26F75BE200E793D4 /* Assets.xcassets */,
 				E47EA15326F75BE200E793D4 /* Info.plist */,
 			);
@@ -97,6 +110,19 @@
 				E47EA15026F75BE200E793D4 /* LaunchScreen.storyboard */,
 			);
 			path = Storyboard;
+			sourceTree = "<group>";
+		};
+		E47EA15D26F762F000E793D4 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				E4675EA226FC6EA700E6A711 /* DateFormatter.swift */,
+				E47EA15E26F7630000E793D4 /* CalendarManager.swift */,
+				E4675E9E26FC342200E6A711 /* Routine.swift */,
+				E4675EA026FC343500E6A711 /* Day.swift */,
+				E4675E9C26FB22D200E6A711 /* Record.swift */,
+				E4675E9A26FB207000E6A711 /* BookStorage.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -169,9 +195,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E4675EA326FC6EA700E6A711 /* DateFormatter.swift in Sources */,
 				E47EA14A26F75BE000E793D4 /* ViewController.swift in Sources */,
+				E4675E9F26FC342200E6A711 /* Routine.swift in Sources */,
 				E47EA14626F75BE000E793D4 /* AppDelegate.swift in Sources */,
+				E4675E9D26FB22D200E6A711 /* Record.swift in Sources */,
+				E4675EA126FC343500E6A711 /* Day.swift in Sources */,
 				E47EA14826F75BE000E793D4 /* SceneDelegate.swift in Sources */,
+				E47EA15F26F7630000E793D4 /* CalendarManager.swift in Sources */,
+				E4675E9B26FB207000E6A711 /* BookStorage.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
