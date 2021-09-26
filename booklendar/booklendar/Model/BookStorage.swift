@@ -12,7 +12,7 @@ class BookStorage {
     
     private var books: [Book]
     
-    init(books: [Book] = []) {
+    private init(books: [Book] = []) {
         self.books = books
     }
     
@@ -31,5 +31,9 @@ class BookStorage {
         }
         books.append(newBook)
         return true
+    }
+    
+    func configure(with books: [Book]) {
+        self.books = books
     }
 }
