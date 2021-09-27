@@ -8,9 +8,7 @@
 import UIKit
 
 final class MontlyCalendarCollectionView: UICollectionView {
-    
-    private let borderWitdh: CGFloat = 1
-    
+
     override init(frame: CGRect, collectionViewLayout layout: UICollectionViewLayout) {
         super.init(frame: frame, collectionViewLayout: layout)
         configure()
@@ -30,8 +28,6 @@ final class MontlyCalendarCollectionView: UICollectionView {
         backgroundColor = .white
         showsVerticalScrollIndicator = false
         translatesAutoresizingMaskIntoConstraints = false
-        // layer.borderWidth = borderWitdh
-        // layer.borderColor = UIColor.darkGray.cgColor
     }
     
     private func registerCells() {
