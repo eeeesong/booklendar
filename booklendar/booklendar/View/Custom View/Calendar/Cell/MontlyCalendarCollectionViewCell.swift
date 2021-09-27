@@ -14,13 +14,13 @@ final class MontlyCalendarCollectionViewCell: UICollectionViewCell {
         label.font = .boldSystemFont(ofSize: 13)
         label.textAlignment = .center
         label.translatesAutoresizingMaskIntoConstraints = false
-        return UILabel()
+        return label
     }()
     
     lazy var coverImageView: FramedImageView = {
         let imageView = FramedImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
-        return FramedImageView()
+        return imageView
     }()
     
     required init?(coder: NSCoder) {
@@ -43,7 +43,9 @@ final class MontlyCalendarCollectionViewCell: UICollectionViewCell {
         
         NSLayoutConstraint.activate([
             dayLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
-            dayLabel.centerYAnchor.constraint(equalToSystemSpacingBelow: centerYAnchor, multiplier: 0.4)
+            dayLabel.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.95),
+            dayLabel.heightAnchor.constraint(equalToConstant: frame.height * 0.15),
+            dayLabel.topAnchor.constraint(equalTo: topAnchor)
         ])
     }
     
@@ -53,8 +55,8 @@ final class MontlyCalendarCollectionViewCell: UICollectionViewCell {
         NSLayoutConstraint.activate([
             coverImageView.centerXAnchor.constraint(equalTo: centerXAnchor),
             coverImageView.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.9),
-            coverImageView.topAnchor.constraint(equalTo: dayLabel.bottomAnchor, constant: 10),
-            coverImageView.heightAnchor.constraint(equalTo: coverImageView.widthAnchor, multiplier: 1.7)
+            coverImageView.topAnchor.constraint(equalTo: dayLabel.bottomAnchor, constant: 8),
+            coverImageView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -8)
         ])
     }
     
