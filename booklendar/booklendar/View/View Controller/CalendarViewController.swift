@@ -9,12 +9,16 @@ import UIKit
 
 final class CalendarViewController: UIViewController {
 
-    lazy var monthlyCalendarView: MontlyCalendarCollectionView = {
+    private lazy var monthlyCalendarView: MontlyCalendarCollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.minimumInteritemSpacing = 0
+        layout.minimumLineSpacing = 0
         let calendarView = MontlyCalendarCollectionView(frame: .zero, collectionViewLayout: layout)
         return calendarView
     }()
+    
+    var previousBoxEndsAt: CGFloat = 0
+    private let sections = [30, 31, 29, 28, 35]
     
     override func loadView() {
         super.loadView()
@@ -34,6 +38,24 @@ final class CalendarViewController: UIViewController {
         DispatchQueue.main.async {
             self.monthlyCalendarView.reloadData()
         }
+        
+        for i in 0..<sections.count {
+            let layer = outlineBox(for: i, cellCount: sections[i])
+            monthlyCalendarView.layer.addSublayer(layer)
+        }
+    }
+    
+    private func outlineBox(for section: Int, cellCount: Int) -> CALayer {
+        let layer = CALayer()
+        layer.borderColor = UIColor.darkGray.cgColor
+        layer.borderWidth = 1
+        let outlineWidth = monthlyCalendarView.frame.width
+        let heightUnit = (outlineWidth - 10) / 7 * 1.7
+        let heightCount = cellCount / 7 + (cellCount % 7 == 0 ? 0 : 1)
+        let outlineHeight = CGFloat(heightCount) * heightUnit + 20
+        layer.frame = CGRect(x: 0, y: previousBoxEndsAt + 100, width: outlineWidth, height: outlineHeight)
+        previousBoxEndsAt += 100 + outlineHeight
+        return layer
     }
     
     private func configure() {
@@ -54,11 +76,11 @@ final class CalendarViewController: UIViewController {
 
 extension CalendarViewController: UICollectionViewDataSource {
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 1
+        return sections.count
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 30
+        return sections[section]
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -88,9 +110,15 @@ extension CalendarViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let cellWidth = collectionView.bounds.width / 7.0
+        let cellWidth = (collectionView.bounds.width - 10) / 7.0
         let cellHeight = cellWidth * 1.7
         return CGSize(width: cellWidth, height: cellHeight)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView,
+                        layout collectionViewLayout: UICollectionViewLayout,
+                        insetForSectionAt section: Int) -> UIEdgeInsets {
+        return UIEdgeInsets(top: 10, left: 4, bottom: 10, right: 4)
     }
 
     func collectionView(_ collectionView: UICollectionView,

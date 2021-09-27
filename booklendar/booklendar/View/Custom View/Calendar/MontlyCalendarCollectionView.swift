@@ -30,8 +30,8 @@ final class MontlyCalendarCollectionView: UICollectionView {
         backgroundColor = .white
         showsVerticalScrollIndicator = false
         translatesAutoresizingMaskIntoConstraints = false
-        layer.borderWidth = borderWitdh
-        layer.borderColor = UIColor.darkGray.cgColor
+        // layer.borderWidth = borderWitdh
+        // layer.borderColor = UIColor.darkGray.cgColor
     }
     
     private func registerCells() {
