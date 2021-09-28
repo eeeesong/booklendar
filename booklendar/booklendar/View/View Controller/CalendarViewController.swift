@@ -17,33 +17,12 @@ final class CalendarViewController: UIViewController {
         return calendarView
     }()
     
+    // 임시
     var previousBoxEndsAt: CGFloat = 0
+    
     private let sections = [30, 31, 29, 28, 35]
-    
-    override func loadView() {
-        super.loadView()
-        configure()
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        // 임시
-        monthlyCalendarView.delegate = self
-        monthlyCalendarView.dataSource = self
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        
-        DispatchQueue.main.async {
-            self.monthlyCalendarView.reloadData()
-        }
-        
-        for i in 0..<sections.count {
-            let layer = outlineBox(for: i, cellCount: sections[i])
-            monthlyCalendarView.layer.addSublayer(layer)
-        }
-    }
+    private var monthlyCalendarDrawer: MonthlyCalendarDrawer?
+    private var calendarDataSource: CalendarDataSource?
     
     private func outlineBox(for section: Int, cellCount: Int) -> CALayer {
         let layer = CALayer()
@@ -56,6 +35,37 @@ final class CalendarViewController: UIViewController {
         layer.frame = CGRect(x: 0, y: previousBoxEndsAt + 100, width: outlineWidth, height: outlineHeight)
         previousBoxEndsAt += 100 + outlineHeight
         return layer
+    }
+    
+    private func addOutlineBoxes() {
+        for i in 0..<sections.count {
+            let layer = outlineBox(for: i, cellCount: sections[i])
+            monthlyCalendarView.layer.addSublayer(layer)
+        }
+    }
+    
+    override func loadView() {
+        super.loadView()
+        configure()
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        monthlyCalendarDrawer = MonthlyCalendarDrawer(calendarWidth: monthlyCalendarView.frame.width)
+        monthlyCalendarView.delegate = monthlyCalendarDrawer
+        
+        calendarDataSource = CalendarDataSource()
+        monthlyCalendarView.dataSource = calendarDataSource
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        DispatchQueue.main.async {
+            self.monthlyCalendarView.reloadData()
+        }
+        addOutlineBoxes()
     }
     
     private func configure() {
@@ -71,59 +81,5 @@ final class CalendarViewController: UIViewController {
             monthlyCalendarView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 50), // 임시
             monthlyCalendarView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
         ])
-    }
-}
-
-extension CalendarViewController: UICollectionViewDataSource {
-    func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return sections.count
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return sections[section]
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cellId = MontlyCalendarCollectionViewCell.identifier
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as? MontlyCalendarCollectionViewCell ?? MontlyCalendarCollectionViewCell()
-        cell.configure(with: "\(Int.random(in: 1...31))", "")
-        return cell
-    }
-    
-    func collectionView(_ collectionView: UICollectionView,
-                        viewForSupplementaryElementOfKind kind: String,
-                        at indexPath: IndexPath) -> UICollectionReusableView {
-        switch kind {
-        case UICollectionView.elementKindSectionHeader:
-            let headerId = CalendarHeaderCollectionViewCell.identifier
-            let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: headerId, for: indexPath) as? CalendarHeaderCollectionViewCell ?? CalendarHeaderCollectionViewCell()
-            let headerInfo = HeaderInfo.month("September 2021")
-            header.configure(with: headerInfo)
-            return header
-        default:
-            assert(false)
-        }
-    }
-}
-
-extension CalendarViewController: UICollectionViewDelegateFlowLayout {
-    func collectionView(_ collectionView: UICollectionView,
-                        layout collectionViewLayout: UICollectionViewLayout,
-                        sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let cellWidth = (collectionView.bounds.width - 10) / 7.0
-        let cellHeight = cellWidth * 1.7
-        return CGSize(width: cellWidth, height: cellHeight)
-    }
-    
-    func collectionView(_ collectionView: UICollectionView,
-                        layout collectionViewLayout: UICollectionViewLayout,
-                        insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsets(top: 10, left: 4, bottom: 10, right: 4)
-    }
-
-    func collectionView(_ collectionView: UICollectionView,
-                        layout collectionViewLayout: UICollectionViewLayout,
-                        referenceSizeForHeaderInSection section: Int) -> CGSize {
-        return CGSize(width: collectionView.frame.width, height: 100)
     }
 }
