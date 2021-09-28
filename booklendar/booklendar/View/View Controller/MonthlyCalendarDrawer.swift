@@ -12,6 +12,14 @@ final class MonthlyCalendarDrawer: NSObject {
     private var previousBoxEndsAt: CGFloat
     private let calendarWidth: CGFloat
     private var outlineBoxes: [CALayer]
+    private lazy var cellWidth = (calendarWidth - Constants.inset) / Constants.cell
+    private lazy var cellHeight = cellWidth * 1.7
+    private lazy var headerHeight = cellHeight * 1.2
+    
+    enum Constants {
+        static let cell: CGFloat = 7
+        static let inset: CGFloat = 10
+    }
     
     init(calendarWidth: CGFloat, previousBoxEndsAt: CGFloat = 0, outlineBoxes: [CALayer] = []) {
         self.calendarWidth = calendarWidth
@@ -27,14 +35,21 @@ final class MonthlyCalendarDrawer: NSObject {
     }
     
     private func outlineBox(for section: Int, cellCount: Int) -> CALayer {
-        let layer = outlineBox()
-        let outlineWidth = calendarWidth
-        let heightUnit = (outlineWidth - 10) / 7 * 1.7
-        let heightCount = cellCount / 7 + (cellCount % 7 == 0 ? 0 : 1)
-        let outlineHeight = CGFloat(heightCount) * heightUnit + 20
-        layer.frame = CGRect(x: 0, y: previousBoxEndsAt + 100, width: outlineWidth, height: outlineHeight)
-        previousBoxEndsAt += 100 + outlineHeight
-        return layer
+        let heightWeight = heightWeight(for: cellCount)
+        let outlineHeight = CGFloat(heightWeight) * cellHeight + 20
+        let yPosition = previousBoxEndsAt + headerHeight
+        
+        let outlineBox = outlineBox()
+        outlineBox.frame = CGRect(x: 0, y: yPosition, width: calendarWidth, height: outlineHeight)
+        previousBoxEndsAt += headerHeight + outlineHeight
+        return outlineBox
+    }
+    
+    private func heightWeight(for cellCount: Int) -> Int {
+        let cellUnit = Int(Constants.cell)
+        let quotient = cellCount / cellUnit
+        let remainder = cellCount % cellUnit
+        return quotient + (remainder == 0 ? 0 : 1)
     }
     
     private func addOutlineBoxes(to monthlyCalendarView: UICollectionView) {
@@ -49,20 +64,20 @@ extension MonthlyCalendarDrawer: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let cellWidth = (collectionView.bounds.width - 10) / 7.0
-        let cellHeight = cellWidth * 1.7
         return CGSize(width: cellWidth, height: cellHeight)
     }
     
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsets(top: 10, left: 4, bottom: 10, right: 4)
+        let full = Constants.inset
+        let half = full / 2
+        return UIEdgeInsets(top: full, left: half, bottom: full, right: half)
     }
 
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         referenceSizeForHeaderInSection section: Int) -> CGSize {
-        return CGSize(width: collectionView.frame.width, height: 100)
+        return CGSize(width: collectionView.frame.width, height: headerHeight)
     }
 }
