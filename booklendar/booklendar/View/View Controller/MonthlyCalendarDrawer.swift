@@ -27,14 +27,13 @@ final class MonthlyCalendarDrawer: NSObject {
         self.outlineBoxes = outlineBoxes
     }
     
-    private func outlineBox() -> CALayer {
-        let layer = CALayer()
-        layer.borderColor = UIColor.darkGray.cgColor
-        layer.borderWidth = 1
-        return layer
+    func addNewBox(to monthlyCalendarView: UICollectionView, for section: Int, with cellCount: Int) {
+        let newBox = outlineBox(for: section, with: cellCount)
+        outlineBoxes.append(newBox)
+        monthlyCalendarView.layer.addSublayer(newBox)
     }
     
-    private func outlineBox(for section: Int, cellCount: Int) -> CALayer {
+    private func outlineBox(for section: Int, with cellCount: Int) -> CALayer {
         let heightWeight = heightWeight(for: cellCount)
         let outlineHeight = CGFloat(heightWeight) * cellHeight + 20
         let yPosition = previousBoxEndsAt + headerHeight
@@ -52,11 +51,11 @@ final class MonthlyCalendarDrawer: NSObject {
         return quotient + (remainder == 0 ? 0 : 1)
     }
     
-    private func addOutlineBoxes(to monthlyCalendarView: UICollectionView) {
-//        for i in 0..<outlineBoxes.count {
-//            let layer = outlineBox(for: i, cellCount: sections[i])
-//            monthlyCalendarView.layer.addSublayer(layer)
-//        }
+    private func outlineBox() -> CALayer {
+        let layer = CALayer()
+        layer.borderColor = UIColor.darkGray.cgColor
+        layer.borderWidth = 1
+        return layer
     }
 }
 
