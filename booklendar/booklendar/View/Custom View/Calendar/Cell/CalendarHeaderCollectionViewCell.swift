@@ -38,11 +38,11 @@ final class CalendarHeaderCollectionViewCell: UICollectionViewCell {
     func configure(with headerInfo: HeaderInfo) {
         switch headerInfo {
         case .month(let text):
-            titleLabel.font = .systemFont(ofSize: 20, weight: .heavy)
+            titleLabel.font = UIFont.bigCalendarTitle()
             titleLabel.text = text
             titleLabel.textAlignment = .left
         case .week(let text):
-            titleLabel.font = .systemFont(ofSize: 14, weight: .bold)
+            titleLabel.font = UIFont.smallCalendarTitle()
             titleLabel.text = text
             titleLabel.textAlignment = .center
         }

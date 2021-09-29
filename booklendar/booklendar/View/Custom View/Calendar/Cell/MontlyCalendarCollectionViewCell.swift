@@ -11,7 +11,7 @@ final class MontlyCalendarCollectionViewCell: UICollectionViewCell {
     
     lazy var dayLabel: UILabel = {
         let label = UILabel()
-        label.font = .boldSystemFont(ofSize: 13)
+        label.font = UIFont.date()
         label.textAlignment = .center
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
