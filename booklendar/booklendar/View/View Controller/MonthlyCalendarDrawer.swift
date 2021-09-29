@@ -35,7 +35,7 @@ final class MonthlyCalendarDrawer: NSObject {
     
     private func outlineBox(for section: Int, with cellCount: Int) -> CALayer {
         let heightWeight = heightWeight(for: cellCount)
-        let outlineHeight = CGFloat(heightWeight) * cellHeight + 20
+        let outlineHeight = CGFloat(heightWeight) * cellHeight + Constants.inset * 2
         let yPosition = previousBoxEndsAt + headerHeight
         
         let outlineBox = outlineBox()
