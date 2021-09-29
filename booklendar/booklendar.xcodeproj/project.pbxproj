@@ -13,6 +13,7 @@
 		E408A4C82701881E003E8521 /* CalendarHeaderCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E408A4C72701881E003E8521 /* CalendarHeaderCollectionViewCell.swift */; };
 		E408A4CB27018C5A003E8521 /* UICollectionViewCell + Reusable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E408A4CA27018C5A003E8521 /* UICollectionViewCell + Reusable.swift */; };
 		E443FB072704549600DFF2E6 /* Size.swift in Sources */ = {isa = PBXBuildFile; fileRef = E443FB062704549600DFF2E6 /* Size.swift */; };
+		E443FB092704610D00DFF2E6 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = E443FB082704610D00DFF2E6 /* Color.swift */; };
 		E45353DC2702CD8E0014E2C1 /* MonthlyCalendarDrawer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E45353DB2702CD8E0014E2C1 /* MonthlyCalendarDrawer.swift */; };
 		E45353DE2702CF9F0014E2C1 /* CalendarDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = E45353DD2702CF9F0014E2C1 /* CalendarDataSource.swift */; };
 		E4675E9B26FB207000E6A711 /* BookStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4675E9A26FB207000E6A711 /* BookStorage.swift */; };
@@ -36,6 +37,7 @@
 		E408A4C72701881E003E8521 /* CalendarHeaderCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarHeaderCollectionViewCell.swift; sourceTree = "<group>"; };
 		E408A4CA27018C5A003E8521 /* UICollectionViewCell + Reusable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionViewCell + Reusable.swift"; sourceTree = "<group>"; };
 		E443FB062704549600DFF2E6 /* Size.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Size.swift; sourceTree = "<group>"; };
+		E443FB082704610D00DFF2E6 /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		E45353DB2702CD8E0014E2C1 /* MonthlyCalendarDrawer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthlyCalendarDrawer.swift; sourceTree = "<group>"; };
 		E45353DD2702CF9F0014E2C1 /* CalendarDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarDataSource.swift; sourceTree = "<group>"; };
 		E4675E9A26FB207000E6A711 /* BookStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookStorage.swift; sourceTree = "<group>"; };
@@ -105,6 +107,7 @@
 			isa = PBXGroup;
 			children = (
 				E443FB062704549600DFF2E6 /* Size.swift */,
+				E443FB082704610D00DFF2E6 /* Color.swift */,
 			);
 			path = Setting;
 			sourceTree = "<group>";
@@ -276,6 +279,7 @@
 				E47EA15F26F7630000E793D4 /* CalendarManager.swift in Sources */,
 				E408A4C82701881E003E8521 /* CalendarHeaderCollectionViewCell.swift in Sources */,
 				E4675E9B26FB207000E6A711 /* BookStorage.swift in Sources */,
+				E443FB092704610D00DFF2E6 /* Color.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

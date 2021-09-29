@@ -9,6 +9,8 @@ import UIKit
 
 final class MontlyCalendarCollectionView: UICollectionView {
 
+    private lazy var calendarColor = CalendarColor.background
+    
     override init(frame: CGRect, collectionViewLayout layout: UICollectionViewLayout) {
         super.init(frame: frame, collectionViewLayout: layout)
         configure()
@@ -25,7 +27,7 @@ final class MontlyCalendarCollectionView: UICollectionView {
     }
     
     private func setup() {
-        backgroundColor = .white
+        backgroundColor = calendarColor
         showsVerticalScrollIndicator = false
         translatesAutoresizingMaskIntoConstraints = false
     }
