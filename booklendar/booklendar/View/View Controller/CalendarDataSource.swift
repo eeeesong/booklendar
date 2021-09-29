@@ -8,7 +8,7 @@
 import UIKit
 
 final class CalendarDataSource: NSObject {
-    private let sections = [30, 31, 29, 28, 35]
+    private(set) var sections = [30, 31, 29, 28, 35]
 }
 
 extension CalendarDataSource: UICollectionViewDataSource {

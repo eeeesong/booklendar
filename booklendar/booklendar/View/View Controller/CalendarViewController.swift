@@ -17,32 +17,9 @@ final class CalendarViewController: UIViewController {
         return calendarView
     }()
     
-    // 임시
-    var previousBoxEndsAt: CGFloat = 0
-    
-    private let sections = [30, 31, 29, 28, 35]
     private var monthlyCalendarDrawer: MonthlyCalendarDrawer?
     private var calendarDataSource: CalendarDataSource?
-    
-    private func outlineBox(for section: Int, cellCount: Int) -> CALayer {
-        let layer = CALayer()
-        layer.borderColor = UIColor.darkGray.cgColor
-        layer.borderWidth = 1
-        let outlineWidth = monthlyCalendarView.frame.width
-        let heightUnit = (outlineWidth - 10) / 7 * 1.7
-        let heightCount = cellCount / 7 + (cellCount % 7 == 0 ? 0 : 1)
-        let outlineHeight = CGFloat(heightCount) * heightUnit + 20
-        layer.frame = CGRect(x: 0, y: previousBoxEndsAt + 100, width: outlineWidth, height: outlineHeight)
-        previousBoxEndsAt += 100 + outlineHeight
-        return layer
-    }
-    
-    private func addOutlineBoxes() {
-        for i in 0..<sections.count {
-            let layer = outlineBox(for: i, cellCount: sections[i])
-            monthlyCalendarView.layer.addSublayer(layer)
-        }
-    }
+    private lazy var calenderWidth = view.frame.width * 0.95
     
     override func loadView() {
         super.loadView()
@@ -51,21 +28,8 @@ final class CalendarViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        monthlyCalendarDrawer = MonthlyCalendarDrawer(calendarWidth: monthlyCalendarView.frame.width)
-        monthlyCalendarView.delegate = monthlyCalendarDrawer
-        
-        calendarDataSource = CalendarDataSource()
-        monthlyCalendarView.dataSource = calendarDataSource
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        
-        DispatchQueue.main.async {
-            self.monthlyCalendarView.reloadData()
-        }
-        addOutlineBoxes()
+        setCalendarViewHelpers()
+        drawCalendarBorders()
     }
     
     private func configure() {
@@ -77,9 +41,23 @@ final class CalendarViewController: UIViewController {
         
         NSLayoutConstraint.activate([
             monthlyCalendarView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            monthlyCalendarView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.95),
+            monthlyCalendarView.widthAnchor.constraint(equalToConstant: calenderWidth),
             monthlyCalendarView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 50), // 임시
             monthlyCalendarView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
         ])
+    }
+    
+    private func setCalendarViewHelpers() {
+        monthlyCalendarDrawer = MonthlyCalendarDrawer(calendarWidth: calenderWidth)
+        monthlyCalendarView.delegate = monthlyCalendarDrawer
+        
+        calendarDataSource = CalendarDataSource()
+        monthlyCalendarView.dataSource = calendarDataSource
+    }
+    
+    private func drawCalendarBorders() {
+        calendarDataSource!.sections.enumerated().forEach { section, cellCount in
+            monthlyCalendarDrawer?.addNewBox(to: monthlyCalendarView, for: section, with: cellCount)
+        }
     }
 }
