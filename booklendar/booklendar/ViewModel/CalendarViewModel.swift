@@ -16,6 +16,6 @@ final class CalendarViewModel: CalendarViewModelType {
     private var calendarManager = CalendarManager(routines: [:])
     
     func newCalendarNeeded() -> [DayRecord] {
-        calendarManager.loadData(including: Date())
+        calendarManager.loadLastData()
     }
 }

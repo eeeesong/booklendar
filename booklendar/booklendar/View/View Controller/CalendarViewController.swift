@@ -53,7 +53,8 @@ final class CalendarViewController: UIViewController {
     }
     
     private func setCalendarViewHelpers() {
-        monthlyCalendarDrawer = MonthlyCalendarDrawer(calendarWidth: calenderWidth)
+        monthlyCalendarDrawer = MonthlyCalendarDrawer(calendarWidth: calenderWidth,
+                                                      scrollHandler: calenderNeedsExtension(_:))
         monthlyCalendarView.delegate = monthlyCalendarDrawer
         
         calendarDataSource = CalendarDataSource()
@@ -62,8 +63,12 @@ final class CalendarViewController: UIViewController {
     
     func set(viewModel: CalendarViewModelType) {
         self.viewModel = viewModel
+        
         let firstMonth = viewModel.newCalendarNeeded()
         newMonthLoaded(firstMonth)
+        
+        let secondMonth = viewModel.newCalendarNeeded()
+        newMonthLoaded(secondMonth)
     }
     
     private func newMonthLoaded(_ newMonth: [DayRecord]) {
@@ -75,5 +80,11 @@ final class CalendarViewController: UIViewController {
         
         guard let currentSection = calendarDataSource?.sections.count else { return }
         monthlyCalendarDrawer?.addNewBox(to: monthlyCalendarView, for: currentSection - 1, with: newMonth.count)
+    }
+    
+    func calenderNeedsExtension(_ isNeeded: Bool) {
+        guard let viewModel = viewModel else { return }
+        let newMonth = viewModel.newCalendarNeeded()
+        newMonthLoaded(newMonth)
     }
 }

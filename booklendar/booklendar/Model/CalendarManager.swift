@@ -9,12 +9,11 @@ import Foundation
 
 class CalendarManager {
     private let calendar = Calendar(identifier: .gregorian)
-    private lazy var months = [[Day]]()
+    private var months = [[Day]]()
     private var routines: [String: Routine]
     
     init(routines: [String: Routine]) {
         self.routines = routines
-        createMonth(startAt: Date())
     }
     
     // 여기서 넘어오게 되는 것은 indexPath (다른 모델을 거치지 않는다면)
@@ -28,10 +27,23 @@ class CalendarManager {
     }
     
     // indexPath로 해당 월 찾기
-    func loadData(including date: Date?) -> [DayRecord] {
-        let dayRecords = months[0]
+    func loadLastData() -> [DayRecord] {
+        if let lastMonth = months.last {
+            let currentDate = lastMonth[15].date!
+            let pastMonthDate = pastMonthDate(from: currentDate)
+            createMonth(startAt: pastMonthDate)
+        } else {
+            createMonth(startAt: Date())
+        }
+        
+        let dayRecords = months.last!
             .map { DayRecord(day: $0, record: mainBook(for: $0.date)) }
         return dayRecords
+    }
+    
+    private func pastMonthDate(from currentDate: Date) -> Date {
+        let pastMonthDate = calendar.date(byAdding: .month, value: -1, to: currentDate)
+        return pastMonthDate ?? Date()
     }
     
     private func mainBook(for date: Date?) -> Record? {
