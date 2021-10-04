@@ -60,9 +60,10 @@ final class MontlyCalendarCollectionViewCell: UICollectionViewCell {
         ])
     }
     
-    func configure(with day: String, _ imageUrl: String) {
-        dayLabel.text = day
+    func configure(with day: Day, _ imageUrl: String) {
+        dayLabel.text = DateFormatter.dateToString(format: DateFormat.onlyDay, date: day.date)
         // 캐시 객체 통해 이미지 불러오는 코드 작성
-        coverImageView.backgroundColor = .green
+        coverImageView.backgroundColor = day.date == nil ? nil : .green
+        isUserInteractionEnabled = !day.isFuture
     }
 }

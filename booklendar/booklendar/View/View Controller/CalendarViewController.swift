@@ -9,6 +9,7 @@ import UIKit
 
 final class CalendarViewController: UIViewController {
 
+    // View
     private lazy var monthlyCalendarView: MontlyCalendarCollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.minimumInteritemSpacing = 0
@@ -16,10 +17,14 @@ final class CalendarViewController: UIViewController {
         let calendarView = MontlyCalendarCollectionView(frame: .zero, collectionViewLayout: layout)
         return calendarView
     }()
+    private lazy var calenderWidth = view.frame.width * 0.95
     
+    // View Helpers
     private var monthlyCalendarDrawer: MonthlyCalendarDrawer?
     private var calendarDataSource: CalendarDataSource?
-    private lazy var calenderWidth = view.frame.width * 0.95
+    
+    // View Model
+    private var viewModel: CalendarViewModelType?
     
     override func loadView() {
         super.loadView()
@@ -29,7 +34,7 @@ final class CalendarViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setCalendarViewHelpers()
-        drawCalendarBorders()
+        set(viewModel: CalendarViewModel())
     }
     
     private func configure() {
@@ -55,9 +60,20 @@ final class CalendarViewController: UIViewController {
         monthlyCalendarView.dataSource = calendarDataSource
     }
     
-    private func drawCalendarBorders() {
-        calendarDataSource!.sections.enumerated().forEach { section, cellCount in
-            monthlyCalendarDrawer?.addNewBox(to: monthlyCalendarView, for: section, with: cellCount)
+    func set(viewModel: CalendarViewModelType) {
+        self.viewModel = viewModel
+        let firstMonth = viewModel.newCalendarNeeded()
+        newMonthLoaded(firstMonth)
+    }
+    
+    private func newMonthLoaded(_ newMonth: [DayRecord]) {
+        calendarDataSource?.new(month: newMonth)
+        
+        DispatchQueue.main.async {
+            self.monthlyCalendarView.reloadData()
         }
+        
+        guard let currentSection = calendarDataSource?.sections.count else { return }
+        monthlyCalendarDrawer?.addNewBox(to: monthlyCalendarView, for: currentSection - 1, with: newMonth.count)
     }
 }

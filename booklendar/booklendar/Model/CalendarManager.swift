@@ -14,6 +14,7 @@ class CalendarManager {
     
     init(routines: [String: Routine]) {
         self.routines = routines
+        createMonth(startAt: Date())
     }
     
     // 여기서 넘어오게 되는 것은 indexPath (다른 모델을 거치지 않는다면)
