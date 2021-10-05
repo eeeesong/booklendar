@@ -64,11 +64,9 @@ final class CalendarViewController: UIViewController {
     func set(viewModel: CalendarViewModelType) {
         self.viewModel = viewModel
         
-        let firstMonth = viewModel.newCalendarNeeded()
-        newMonthLoaded(firstMonth)
-        
-        let secondMonth = viewModel.newCalendarNeeded()
-        newMonthLoaded(secondMonth)
+        viewModel.initialData(of: 2).forEach { month in
+            newMonthLoaded(month)
+        }
     }
     
     private func newMonthLoaded(_ newMonth: [DayRecord]) {
@@ -83,7 +81,7 @@ final class CalendarViewController: UIViewController {
     }
     
     func calenderNeedsExtension(_ isNeeded: Bool) {
-        guard let viewModel = viewModel else { return }
+        guard isNeeded, let viewModel = viewModel else { return }
         let newMonth = viewModel.newCalendarNeeded()
         newMonthLoaded(newMonth)
     }
