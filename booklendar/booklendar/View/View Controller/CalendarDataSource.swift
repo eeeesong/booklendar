@@ -8,7 +8,11 @@
 import UIKit
 
 final class CalendarDataSource: NSObject {
-    private(set) var sections = [30, 31, 29, 28, 35]
+    private(set) var sections = [[DayRecord]]()
+    
+    func new(month: [DayRecord]) {
+        sections.append(month)
+    }
 }
 
 extension CalendarDataSource: UICollectionViewDataSource {
@@ -17,13 +21,13 @@ extension CalendarDataSource: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return sections[section]
+        return sections[section].count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cellId = MontlyCalendarCollectionViewCell.identifier
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as? MontlyCalendarCollectionViewCell ?? MontlyCalendarCollectionViewCell()
-        cell.configure(with: "\(Int.random(in: 1...31))", "")
+        cell.configure(with: sections[indexPath.section][indexPath.row].day, "")
         return cell
     }
     
@@ -34,7 +38,9 @@ extension CalendarDataSource: UICollectionViewDataSource {
         case UICollectionView.elementKindSectionHeader:
             let headerId = CalendarHeaderCollectionViewCell.identifier
             let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: headerId, for: indexPath) as? CalendarHeaderCollectionViewCell ?? CalendarHeaderCollectionViewCell()
-            let headerInfo = HeaderInfo.month("September 2021")
+            let midDay = sections[indexPath.section][15].day
+            let monthInfo = DateFormatter.dateToString(format: DateFormat.monthYear, date: midDay.date)
+            let headerInfo = HeaderInfo.month(monthInfo)
             header.configure(with: headerInfo)
             return header
         default:

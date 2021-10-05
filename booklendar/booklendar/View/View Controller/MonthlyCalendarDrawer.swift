@@ -7,6 +7,8 @@
 
 import UIKit
 
+typealias ScrollHandler = (Bool) -> Void
+
 final class MonthlyCalendarDrawer: NSObject {
     
     private var previousBoxEndsAt: CGFloat
@@ -15,16 +17,18 @@ final class MonthlyCalendarDrawer: NSObject {
     private lazy var cellWidth = (calendarWidth - Constants.inset) / Constants.cell
     private lazy var cellHeight = cellWidth * 1.7
     private lazy var headerHeight = cellHeight * 1.2
+    private var scrollHandler: ScrollHandler
     
     enum Constants {
         static let cell: CGFloat = 7
         static let inset: CGFloat = 10
     }
     
-    init(calendarWidth: CGFloat, previousBoxEndsAt: CGFloat = 0, outlineBoxes: [CALayer] = []) {
+    init(calendarWidth: CGFloat, previousBoxEndsAt: CGFloat = 0, outlineBoxes: [CALayer] = [], scrollHandler: @escaping ScrollHandler) {
         self.calendarWidth = calendarWidth
         self.previousBoxEndsAt = previousBoxEndsAt
         self.outlineBoxes = outlineBoxes
+        self.scrollHandler = scrollHandler
     }
     
     func addNewBox(to monthlyCalendarView: UICollectionView, for section: Int, with cellCount: Int) {
@@ -78,5 +82,9 @@ extension MonthlyCalendarDrawer: UICollectionViewDelegateFlowLayout {
                         layout collectionViewLayout: UICollectionViewLayout,
                         referenceSizeForHeaderInSection section: Int) -> CGSize {
         return CGSize(width: collectionView.frame.width, height: headerHeight)
+    }
+    
+    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        scrollHandler(true)
     }
 }
