@@ -16,7 +16,6 @@ class CalendarManager {
         self.routines = routines
     }
     
-    // 여기서 넘어오게 되는 것은 indexPath (다른 모델을 거치지 않는다면)
     func allRecords(for date: Date) -> [Record]? {
         let dateKey = DateFormatter.dateToString(format: DateFormat.dateKey, date: date)
         
@@ -26,7 +25,6 @@ class CalendarManager {
         return day.all()
     }
     
-    // indexPath로 해당 월 찾기
     func loadLastData() -> [DayRecord] {
         if let lastMonth = months.last {
             let currentDate = lastMonth[15].date!
@@ -72,7 +70,7 @@ class CalendarManager {
 
         for i in 0..<numberOfDays {
             let date = calendar.date(byAdding: .day, value: i, to: firstDay) ?? Date()
-            let status = isFuture(date: date) ? true : false
+            let status = isFuture(date: date)
             days.append(Day(isFuture: status, date: date, isEmpty: false))
         }
         return days

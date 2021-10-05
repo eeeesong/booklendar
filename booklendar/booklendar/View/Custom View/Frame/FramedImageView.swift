@@ -8,5 +8,5 @@
 import UIKit
 
 class FramedImageView: UIImageView {
-    // 임시 생성
+
 }
