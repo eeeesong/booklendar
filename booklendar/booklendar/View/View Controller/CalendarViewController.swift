@@ -54,7 +54,7 @@ final class CalendarViewController: UIViewController {
     
     private func setCalendarViewHelpers() {
         monthlyCalendarDrawer = MonthlyCalendarDrawer(calendarWidth: calenderWidth,
-                                                      scrollHandler: calenderNeedsExtension(_:))
+                                                      actionHandler: viewNeedsChanges(with:))
         monthlyCalendarView.delegate = monthlyCalendarDrawer
         
         calendarDataSource = CalendarDataSource()
@@ -80,9 +80,15 @@ final class CalendarViewController: UIViewController {
         monthlyCalendarDrawer?.addNewBox(to: monthlyCalendarView, for: currentSection - 1, with: newMonth.count)
     }
     
-    func calenderNeedsExtension(_ isNeeded: Bool) {
-        guard isNeeded, let viewModel = viewModel else { return }
-        let newMonth = viewModel.newCalendarNeeded()
-        newMonthLoaded(newMonth)
+    func viewNeedsChanges(with action: CalendarAction) {
+        guard let viewModel = viewModel else { return }
+        
+        switch action {
+        case .needsMore:
+            let newMonth = viewModel.newCalendarNeeded()
+            newMonthLoaded(newMonth)
+        case .selectedAt(let indexPath):
+            print(indexPath)
+        }
     }
 }
