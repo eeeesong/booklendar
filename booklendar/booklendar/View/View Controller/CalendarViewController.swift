@@ -38,6 +38,7 @@ final class CalendarViewController: UIViewController {
     }
     
     private func configure() {
+        view.backgroundColor = .white
         addCalendarView()
     }
     

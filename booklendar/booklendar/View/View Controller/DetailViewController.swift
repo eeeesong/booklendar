@@ -47,6 +47,7 @@ final class DetailViewController: UIViewController {
     private lazy var commentView: UITextView = {
         let textView = UITextView()
         textView.text = "이곳에 전체 코멘트가 표시된다"
+        textView.font = UIFont.body()
         textView.textAlignment = .left
         textView.layer.borderWidth = 1
         textView.translatesAutoresizingMaskIntoConstraints = false
@@ -59,6 +60,7 @@ final class DetailViewController: UIViewController {
     }
     
     private func configure() {
+        view.backgroundColor = .white
         addDateLabel()
         addImageFrame()
         addbookInfoLabels()
@@ -70,7 +72,7 @@ final class DetailViewController: UIViewController {
         
         NSLayoutConstraint.activate([
             dateLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            dateLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 20),
+            dateLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
             dateLabel.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.95)
         ])
     }
