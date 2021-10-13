@@ -89,6 +89,8 @@ final class CalendarViewController: UIViewController {
             newMonthLoaded(newMonth)
         case .selectedAt(let indexPath):
             print(indexPath)
+            let nextVC = DetailViewController()
+            navigationController?.pushViewController(nextVC, animated: true)
         }
     }
 }
