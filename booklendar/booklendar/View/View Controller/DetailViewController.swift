@@ -44,14 +44,12 @@ final class DetailViewController: UIViewController {
         return label
     }()
     
-    private lazy var commentView: UITextView = {
-        let textView = UITextView()
-        textView.text = "이곳에 전체 코멘트가 표시된다"
-        textView.font = UIFont.body()
-        textView.textAlignment = .left
-        textView.layer.borderWidth = 1
-        textView.translatesAutoresizingMaskIntoConstraints = false
-        return textView
+    private lazy var commentCollectionView: DetailCollectionView = {
+        let layout = UICollectionViewFlowLayout()
+        layout.minimumInteritemSpacing = 0
+        layout.minimumLineSpacing = 0
+        let collectionView = DetailCollectionView(frame: .zero, collectionViewLayout: layout)
+        return collectionView
     }()
     
     override func loadView() {
@@ -65,6 +63,12 @@ final class DetailViewController: UIViewController {
         addImageFrame()
         addbookInfoLabels()
         addCommentView()
+        commentCollectionView.delegate = self
+        commentCollectionView.dataSource = self
+        
+        DispatchQueue.main.async {
+            self.commentCollectionView.reloadData()
+        }
     }
     
     private func addDateLabel() {
@@ -107,13 +111,36 @@ final class DetailViewController: UIViewController {
     }
     
     private func addCommentView() {
-        view.addSubview(commentView)
+        view.addSubview(commentCollectionView)
         
         NSLayoutConstraint.activate([
-            commentView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            commentView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.8),
-            commentView.topAnchor.constraint(equalTo: authorLabel.bottomAnchor, constant: 20),
-            commentView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20)
+            commentCollectionView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            commentCollectionView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.95),
+            commentCollectionView.topAnchor.constraint(equalTo: authorLabel.bottomAnchor, constant: 20),
+            commentCollectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20)
         ])
+    }
+}
+
+extension DetailViewController: UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let width = view.bounds.width * 0.8
+        let height = width
+        return CGSize(width: width, height: height)
+    }
+}
+
+extension DetailViewController: UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 5
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cellId = CommentCollectionViewCell.identifier
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as? CommentCollectionViewCell ?? CommentCollectionViewCell()
+        let commentInfo = CommentInfo(date: "2021. 10. \(indexPath.row + 5)",
+                                      body: String(repeating: "안녕하세요. 테스트입니다.", count: indexPath.row * 10))
+        cell.configure(with: commentInfo)
+        return cell
     }
 }
