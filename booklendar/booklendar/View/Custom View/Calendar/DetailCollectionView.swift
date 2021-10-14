@@ -23,8 +23,9 @@ final class DetailCollectionView: UICollectionView {
     
     private func configure() {
         setup()
-        registerCell()
+        registerCells()
     }
+    
     
     private func setup() {
         backgroundColor = calendarColor
@@ -32,8 +33,20 @@ final class DetailCollectionView: UICollectionView {
         translatesAutoresizingMaskIntoConstraints = false
     }
     
-    private func registerCell() {
+    private func registerCells() {
+        registerContentsCell()
+        registerHeaderCell()
+    }
+    
+    private func registerContentsCell() {
         let cellId = CommentCollectionViewCell.identifier
         register(CommentCollectionViewCell.self, forCellWithReuseIdentifier: cellId)
+    }
+    
+    private func registerHeaderCell() {
+        let cellId = DetailHeaderCollectionViewCell.identifier
+        register(DetailHeaderCollectionViewCell.self,
+                 forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
+                 withReuseIdentifier: cellId)
     }
 }
