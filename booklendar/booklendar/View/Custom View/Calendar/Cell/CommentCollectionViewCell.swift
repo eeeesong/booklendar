@@ -24,6 +24,7 @@ final class CommentCollectionViewCell: UICollectionViewCell {
         textView.isEditable = false
         textView.isSelectable = true
         textView.textContainerInset = .init(top: 10, left: 12, bottom: 10, right: 12)
+        textView.layer.borderWidth = 1
         textView.translatesAutoresizingMaskIntoConstraints = false
         return textView
     }()
@@ -47,7 +48,7 @@ final class CommentCollectionViewCell: UICollectionViewCell {
         addSubview(dateLabel)
         
         NSLayoutConstraint.activate([
-            dateLabel.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leftAnchor, constant: 20),
+            dateLabel.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 20),
             dateLabel.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 15),
             dateLabel.widthAnchor.constraint(equalTo: safeAreaLayoutGuide.widthAnchor, multiplier: 0.9)
         ])
@@ -58,14 +59,15 @@ final class CommentCollectionViewCell: UICollectionViewCell {
         
         NSLayoutConstraint.activate([
             commentTextView.centerXAnchor.constraint(equalTo: centerXAnchor),
-            commentTextView.topAnchor.constraint(equalTo: dateLabel.bottomAnchor, constant: -15),
+            commentTextView.topAnchor.constraint(equalTo: dateLabel.bottomAnchor, constant: 15),
             commentTextView.widthAnchor.constraint(equalTo: safeAreaLayoutGuide.widthAnchor, multiplier: 0.9),
             commentTextView.bottomAnchor.constraint(greaterThanOrEqualTo: safeAreaLayoutGuide.bottomAnchor, constant: -15)
         ])
     }
     
     func configure(with commentInfo: CommentInfo) {
-        
+        dateLabel.text = commentInfo.date
+        commentTextView.text = commentInfo.body
     }
 }
 
