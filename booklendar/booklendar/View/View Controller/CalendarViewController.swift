@@ -10,11 +10,13 @@ import UIKit
 final class CalendarViewController: UIViewController {
 
     // View
-    private lazy var monthlyCalendarView: MontlyCalendarCollectionView = {
+    private lazy var monthlyCalendarView: BooklendarCollectionView<MontlyCalendarCollectionViewCell,
+                                                                   CalendarHeaderCollectionViewCell> = {
         let layout = UICollectionViewFlowLayout()
         layout.minimumInteritemSpacing = 0
         layout.minimumLineSpacing = 0
-        let calendarView = MontlyCalendarCollectionView(frame: .zero, collectionViewLayout: layout)
+        let calendarView = BooklendarCollectionView<MontlyCalendarCollectionViewCell,
+                                                    CalendarHeaderCollectionViewCell>(frame: .zero, collectionViewLayout: layout)
         return calendarView
     }()
     private lazy var calenderWidth = view.frame.width * 0.95
