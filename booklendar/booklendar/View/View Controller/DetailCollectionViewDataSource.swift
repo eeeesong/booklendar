@@ -8,9 +8,9 @@
 import UIKit
 
 final class DetailCollectionViewDataSource: NSObject {
-    private(set) var record: DayRecord
+    private(set) var record: DayRecord?
     
-    required init(record: DayRecord) {
+    required init(record: DayRecord?) {
         self.record = record
         super.init()
     }
@@ -28,8 +28,8 @@ extension DetailCollectionViewDataSource: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cellId = CommentCollectionViewCell.identifier
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as? CommentCollectionViewCell ?? CommentCollectionViewCell()
-        let dateString = DateFormatter.dateToString(format: DateFormat.dateKey, date: record.day.date)
-        let comment = record.record?.comment ?? ""
+        let dateString = DateFormatter.dateToString(format: DateFormat.dateKey, date: record?.day.date)
+        let comment = record?.record?.comment ?? ""
         let commentInfo = CommentInfo(date: dateString, body: comment)
         cell.configure(with: commentInfo)
         return cell
@@ -42,7 +42,10 @@ extension DetailCollectionViewDataSource: UICollectionViewDataSource {
         case UICollectionView.elementKindSectionHeader:
             let headerId = DetailHeaderCollectionViewCell.identifier
             let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: headerId, for: indexPath) as? DetailHeaderCollectionViewCell ?? DetailHeaderCollectionViewCell()
-            header.configure(with: record)
+            
+            if let record = record {
+                header.configure(with: record)
+            }
             return header
         default:
             assert(false)

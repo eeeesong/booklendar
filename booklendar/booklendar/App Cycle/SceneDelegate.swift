@@ -12,6 +12,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         let calendarViewController = CalendarViewController()
+        let calendarViewModel = CalendarViewModel()
+        calendarViewController.set(calendarViewModel)
         let navigationController = UINavigationController(rootViewController: calendarViewController)
         window?.rootViewController = navigationController
     }
