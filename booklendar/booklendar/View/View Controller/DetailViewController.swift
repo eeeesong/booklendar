@@ -10,7 +10,7 @@ import UIKit
 final class DetailViewController: UIViewController {
     
     // View
-    private lazy var commentCollectionView: BooklendarCollectionView<CommentCollectionViewCell,
+    private lazy var detailCollectionView: BooklendarCollectionView<CommentCollectionViewCell,
                                                                      DetailHeaderCollectionViewCell> = {
         let layout = UICollectionViewFlowLayout()
         layout.minimumInteritemSpacing = 0
@@ -20,81 +20,43 @@ final class DetailViewController: UIViewController {
         return collectionView
     }()
     
+    // View Helpers
+    private var detailCollectionViewDrawer: DetailCollectionViewDrawer?
+    private var detailCollectionViewDataSource: DetailCollectionViewDataSource?
+
     override func loadView() {
         super.loadView()
         configure()
     }
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        setDetailViewHelpers()
+    }
+    
     private func configure() {
         view.backgroundColor = .white
         addCommentView()
-        commentCollectionView.delegate = self
-        commentCollectionView.dataSource = self
-        
-        DispatchQueue.main.async {
-            self.commentCollectionView.reloadData()
-        }
     }
 
     private func addCommentView() {
-        view.addSubview(commentCollectionView)
+        view.addSubview(detailCollectionView)
         
         NSLayoutConstraint.activate([
-            commentCollectionView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            commentCollectionView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.95),
-            commentCollectionView.topAnchor.constraint(equalTo: view.topAnchor, constant: 20),
-            commentCollectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20)
+            detailCollectionView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            detailCollectionView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.95),
+            detailCollectionView.topAnchor.constraint(equalTo: view.topAnchor, constant: 20),
+            detailCollectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20)
         ])
     }
-}
-
-extension DetailViewController: UICollectionViewDelegateFlowLayout {
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let width = view.bounds.width * 0.8
-        let height = width
-        return CGSize(width: width, height: height)
-    }
     
-    func collectionView(_ collectionView: UICollectionView,
-                        layout collectionViewLayout: UICollectionViewLayout,
-                        referenceSizeForHeaderInSection section: Int) -> CGSize {
-        let width = view.bounds.width * 0.8
-        let height = width * 1.2
-        return CGSize(width: width, height: height)
-    }
-}
-
-extension DetailViewController: UICollectionViewDataSource {
-    func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 1
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 5
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cellId = CommentCollectionViewCell.identifier
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as? CommentCollectionViewCell ?? CommentCollectionViewCell()
-        let commentInfo = CommentInfo(date: "2021. 10. \(indexPath.row + 5)",
-                                      body: String(repeating: "안녕하세요. 테스트입니다.", count: indexPath.row * 10))
-        cell.configure(with: commentInfo)
-        return cell
-    }
-    
-    func collectionView(_ collectionView: UICollectionView,
-                        viewForSupplementaryElementOfKind kind: String,
-                        at indexPath: IndexPath) -> UICollectionReusableView {
-        switch kind {
-        case UICollectionView.elementKindSectionHeader:
-            let headerId = DetailHeaderCollectionViewCell.identifier
-            let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: headerId, for: indexPath) as? DetailHeaderCollectionViewCell ?? DetailHeaderCollectionViewCell()
-            let dayRecord = DayRecord(day: Day(isFuture: true, date: Date(), isEmpty: false),
-                                      record: Record(order: 0, book: Book(recentlyAdded: Date(), id: "", coverUrl: "", title: "SAVAGE", authors: ["에스파","이수만","유영진"], translators: [], publisher: "", page: 400), comment: "하하하"))
-            header.configure(with: dayRecord)
-            return header
-        default:
-            assert(false)
-        }
+    private func setDetailViewHelpers() {
+        detailCollectionViewDrawer = DetailCollectionViewDrawer()
+        detailCollectionView.delegate = detailCollectionViewDrawer
+        
+        let tempRecord = DayRecord(day: Day(isFuture: false, date: Date(), isEmpty: false),
+                                   record: Record(order: 0, book: Book(recentlyAdded: Date(), id: "", coverUrl: "", title: "SAVAGE", authors: ["에스파"], translators: [], publisher: "", page: 400), comment: "oh my gosh~ don't you know i'm a"))
+        detailCollectionViewDataSource = DetailCollectionViewDataSource(record: tempRecord)
+        detailCollectionView.dataSource = detailCollectionViewDataSource
     }
 }
