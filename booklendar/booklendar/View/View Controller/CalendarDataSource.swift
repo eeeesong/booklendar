@@ -25,8 +25,8 @@ extension CalendarDataSource: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cellId = MontlyCalendarCollectionViewCell.identifier
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as? MontlyCalendarCollectionViewCell ?? MontlyCalendarCollectionViewCell()
+        let cellId = MonthlyCalendarCollectionViewCell.identifier
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as? MonthlyCalendarCollectionViewCell ?? MonthlyCalendarCollectionViewCell()
         cell.configure(with: sections[indexPath.section][indexPath.row].day, "")
         return cell
     }

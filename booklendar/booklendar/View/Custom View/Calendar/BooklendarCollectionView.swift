@@ -1,13 +1,14 @@
 //
-//  MontlyCalendarCollectionView.swift
+//  BooklendarCollectionView.swift
 //  booklendar
 //
-//  Created by Song on 2021/09/27.
+//  Created by Song on 2021/10/14.
 //
 
 import UIKit
 
-final class MontlyCalendarCollectionView: UICollectionView {
+final class BooklendarCollectionView<ContentCell: UICollectionViewCell,
+                                     HeaderCell: UICollectionViewCell>: UICollectionView {
 
     private lazy var calendarColor = CalendarColor.background
     
@@ -38,13 +39,13 @@ final class MontlyCalendarCollectionView: UICollectionView {
     }
     
     private func registerContentsCell() {
-        let cellId = MontlyCalendarCollectionViewCell.identifier
-        register(MontlyCalendarCollectionViewCell.self, forCellWithReuseIdentifier: cellId)
+        let cellId = ContentCell.identifier
+        register(ContentCell.self, forCellWithReuseIdentifier: cellId)
     }
     
     private func registerHeaderCell() {
-        let cellId = CalendarHeaderCollectionViewCell.identifier
-        register(CalendarHeaderCollectionViewCell.self,
+        let cellId = HeaderCell.identifier
+        register(HeaderCell.self,
                  forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
                  withReuseIdentifier: cellId)
     }
