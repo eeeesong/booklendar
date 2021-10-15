@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class MontlyCalendarCollectionViewCell: UICollectionViewCell {
+final class MonthlyCalendarCollectionViewCell: UICollectionViewCell {
     
     lazy var dayLabel: UILabel = {
         let label = UILabel()
