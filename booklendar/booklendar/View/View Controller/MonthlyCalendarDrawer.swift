@@ -7,7 +7,12 @@
 
 import UIKit
 
-typealias ScrollHandler = (Bool) -> Void
+typealias CalendarHandler = (CalendarAction) -> Void
+
+enum CalendarAction {
+    case needsMore
+    case selectedAt(IndexPath)
+}
 
 final class MonthlyCalendarDrawer: NSObject {
     
@@ -17,18 +22,18 @@ final class MonthlyCalendarDrawer: NSObject {
     private lazy var cellWidth = (calendarWidth - Constants.inset) / Constants.cell
     private lazy var cellHeight = cellWidth * 1.7
     private lazy var headerHeight = cellHeight * 1.2
-    private var scrollHandler: ScrollHandler
+    private var actionHandler: CalendarHandler
     
     enum Constants {
         static let cell: CGFloat = 7
         static let inset: CGFloat = 10
     }
     
-    init(calendarWidth: CGFloat, previousBoxEndsAt: CGFloat = 0, outlineBoxes: [CALayer] = [], scrollHandler: @escaping ScrollHandler) {
+    init(calendarWidth: CGFloat, previousBoxEndsAt: CGFloat = 0, outlineBoxes: [CALayer] = [], actionHandler: @escaping CalendarHandler) {
         self.calendarWidth = calendarWidth
         self.previousBoxEndsAt = previousBoxEndsAt
         self.outlineBoxes = outlineBoxes
-        self.scrollHandler = scrollHandler
+        self.actionHandler = actionHandler
     }
     
     func addNewBox(to monthlyCalendarView: UICollectionView, for section: Int, with cellCount: Int) {
@@ -85,6 +90,10 @@ extension MonthlyCalendarDrawer: UICollectionViewDelegateFlowLayout {
     }
     
     func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
-        scrollHandler(true)
+        actionHandler(.needsMore)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        actionHandler(.selectedAt(indexPath))
     }
 }

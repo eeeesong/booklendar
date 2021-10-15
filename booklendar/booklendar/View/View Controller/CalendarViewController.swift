@@ -10,11 +10,13 @@ import UIKit
 final class CalendarViewController: UIViewController {
 
     // View
-    private lazy var monthlyCalendarView: MontlyCalendarCollectionView = {
+    private lazy var monthlyCalendarView: BooklendarCollectionView<MonthlyCalendarCollectionViewCell,
+                                                                   CalendarHeaderCollectionViewCell> = {
         let layout = UICollectionViewFlowLayout()
         layout.minimumInteritemSpacing = 0
         layout.minimumLineSpacing = 0
-        let calendarView = MontlyCalendarCollectionView(frame: .zero, collectionViewLayout: layout)
+        let calendarView = BooklendarCollectionView<MonthlyCalendarCollectionViewCell,
+                                                    CalendarHeaderCollectionViewCell>(frame: .zero, collectionViewLayout: layout)
         return calendarView
     }()
     private lazy var calenderWidth = view.frame.width * 0.95
@@ -34,10 +36,11 @@ final class CalendarViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setCalendarViewHelpers()
-        set(viewModel: CalendarViewModel())
+        setInitialData()
     }
     
     private func configure() {
+        view.backgroundColor = .white
         addCalendarView()
     }
     
@@ -54,19 +57,21 @@ final class CalendarViewController: UIViewController {
     
     private func setCalendarViewHelpers() {
         monthlyCalendarDrawer = MonthlyCalendarDrawer(calendarWidth: calenderWidth,
-                                                      scrollHandler: calenderNeedsExtension(_:))
+                                                      actionHandler: viewNeedsChanges(with:))
         monthlyCalendarView.delegate = monthlyCalendarDrawer
         
         calendarDataSource = CalendarDataSource()
         monthlyCalendarView.dataSource = calendarDataSource
     }
     
-    func set(viewModel: CalendarViewModelType) {
-        self.viewModel = viewModel
-        
-        viewModel.initialData(of: 2).forEach { month in
+    private func setInitialData() {
+        viewModel?.initialData(of: 2).forEach { month in
             newMonthLoaded(month)
         }
+    }
+    
+    func set(_ viewModel: CalendarViewModelType) {
+        self.viewModel = viewModel
     }
     
     private func newMonthLoaded(_ newMonth: [DayRecord]) {
@@ -80,9 +85,20 @@ final class CalendarViewController: UIViewController {
         monthlyCalendarDrawer?.addNewBox(to: monthlyCalendarView, for: currentSection - 1, with: newMonth.count)
     }
     
-    func calenderNeedsExtension(_ isNeeded: Bool) {
-        guard isNeeded, let viewModel = viewModel else { return }
-        let newMonth = viewModel.newCalendarNeeded()
-        newMonthLoaded(newMonth)
+    func viewNeedsChanges(with action: CalendarAction) {
+        guard let viewModel = viewModel else { return }
+        
+        switch action {
+        case .needsMore:
+            let newMonth = viewModel.newCalendarNeeded()
+            newMonthLoaded(newMonth)
+        case .selectedAt(let indexPath):
+            let nextVC = DetailViewController()
+            let tempRecord = DayRecord(day: Day(isFuture: false, date: Date(), isEmpty: false),
+                                       record: Record(order: 0, book: Book(recentlyAdded: Date(), id: "", coverUrl: "", title: "SAVAGE", authors: ["에스파","이수만"], translators: [], publisher: "", page: 400), comment: "oh my gosh~"))
+            let viewModel = DetailViewModel(currentRecord: tempRecord)
+            nextVC.set(viewModel)
+            navigationController?.pushViewController(nextVC, animated: true)
+        }
     }
 }
