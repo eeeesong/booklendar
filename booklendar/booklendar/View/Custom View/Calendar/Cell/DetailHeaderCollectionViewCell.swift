@@ -95,11 +95,8 @@ final class DetailHeaderCollectionViewCell: UICollectionViewCell {
         ])
     }
     
-    func configure(with dayRecord: DayRecord) {
-        let dateText = DateFormatter.dateToString(format: DateFormat.dateKey, date: dayRecord.day.date)
-        dateLabel.text = dateText
-        
-        let book = dayRecord.record?.book
+    func configure(with dateString: String,_ book: Book?) {
+        dateLabel.text = dateString
         titleLabel.text = book?.title
         authorLabel.text = book?.authors.joined(separator: ", ")
     }

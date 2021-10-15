@@ -57,7 +57,7 @@ final class DetailViewController: UIViewController {
         detailCollectionViewDrawer = DetailCollectionViewDrawer()
         detailCollectionView.delegate = detailCollectionViewDrawer
         
-        detailCollectionViewDataSource = DetailCollectionViewDataSource(record: viewModel?.initialData())
+        detailCollectionViewDataSource = DetailCollectionViewDataSource(dayRecord: viewModel?.initialData())
         detailCollectionView.dataSource = detailCollectionViewDataSource
     }
     
