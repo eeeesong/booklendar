@@ -11,7 +11,6 @@ final class DetailHeaderCollectionViewCell: UICollectionViewCell {
     
     private lazy var dateLabel: UILabel = {
         let label = UILabel()
-        label.text = "2021. 10. 13."
         label.font = UIFont.smallCalendarTitle()
         label.textAlignment = .center
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -27,7 +26,6 @@ final class DetailHeaderCollectionViewCell: UICollectionViewCell {
     
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
-        label.text = "지구인만큼 지구를 사랑할 순 없어"
         label.font = UIFont.bookTitle()
         label.textAlignment = .center
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -36,7 +34,6 @@ final class DetailHeaderCollectionViewCell: UICollectionViewCell {
     
     private lazy var authorLabel: UILabel = {
         let label = UILabel()
-        label.text = "정세랑"
         label.font = UIFont.body()
         label.textAlignment = .center
         label.translatesAutoresizingMaskIntoConstraints = false
