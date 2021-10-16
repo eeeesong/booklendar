@@ -14,7 +14,11 @@ protocol CalendarViewModelType {
 
 final class CalendarViewModel: CalendarViewModelType {
     
-    private var calendarManager = CalendarManager(routines: [:])
+    private var calendarManager: CalendarManagable
+    
+    init(calendarManager: CalendarManagable) {
+        self.calendarManager = calendarManager
+    }
     
     func initialData(of initialCount: Int) -> [[DayRecord]] {
         var initialData = [[DayRecord]]()

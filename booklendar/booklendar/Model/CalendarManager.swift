@@ -7,7 +7,12 @@
 
 import Foundation
 
-class CalendarManager {
+protocol CalendarManagable {
+    func allRecords(for date: Date) -> [Record]?
+    func loadLastData() -> [DayRecord]
+}
+
+final class CalendarManager: CalendarManagable {
     private let calendar = Calendar(identifier: .gregorian)
     private var months = [[Day]]()
     private var routines: [String: Routine]
