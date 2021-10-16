@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class DetailViewController: UIViewController {
+final class DetailViewController: UIViewController, ViewModelIncludable {
     
     // View
     typealias DetailCollectionView = BooklendarCollectionView<CommentCollectionViewCell,
@@ -25,7 +25,7 @@ final class DetailViewController: UIViewController {
     private var detailCollectionViewDataSource: DetailCollectionViewDataSource?
 
     // View Model
-    private var viewModel: DetailViewModelType?
+    var viewModel: DetailViewModelType?
     
     override func loadView() {
         super.loadView()
@@ -59,9 +59,5 @@ final class DetailViewController: UIViewController {
         
         detailCollectionViewDataSource = DetailCollectionViewDataSource(dayRecord: viewModel?.initialData())
         detailCollectionView.dataSource = detailCollectionViewDataSource
-    }
-    
-    func set(_ viewModel: DetailViewModelType) {
-        self.viewModel = viewModel
     }
 }
