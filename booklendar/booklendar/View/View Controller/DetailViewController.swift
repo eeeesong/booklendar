@@ -10,13 +10,13 @@ import UIKit
 final class DetailViewController: UIViewController {
     
     // View
-    private lazy var detailCollectionView: BooklendarCollectionView<CommentCollectionViewCell,
-                                                                     DetailHeaderCollectionViewCell> = {
+    typealias DetailCollectionView = BooklendarCollectionView<CommentCollectionViewCell,
+                                                              DetailHeaderCollectionViewCell>
+    private lazy var detailCollectionView: DetailCollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.minimumInteritemSpacing = 0
         layout.minimumLineSpacing = 0
-        let collectionView = BooklendarCollectionView<CommentCollectionViewCell,
-                                                      DetailHeaderCollectionViewCell> (frame: .zero, collectionViewLayout: layout)
+        let collectionView = DetailCollectionView(frame: .zero, collectionViewLayout: layout)
         return collectionView
     }()
     
