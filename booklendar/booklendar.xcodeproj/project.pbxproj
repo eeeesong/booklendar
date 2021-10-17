@@ -38,6 +38,7 @@
 		E4AE4B4B270A817000C1C4CA /* CalendarViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4AE4B4A270A817000C1C4CA /* CalendarViewModel.swift */; };
 		E4D92F07271C04B7002F054C /* Coordinator Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4D92F06271C04B7002F054C /* Coordinator Protocols.swift */; };
 		E4D92F09271C09C7002F054C /* DetailPushCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4D92F08271C09C7002F054C /* DetailPushCoordinator.swift */; };
+		E4D92F0E271C1233002F054C /* DetailSceneMaker.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4D92F0D271C1233002F054C /* DetailSceneMaker.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -74,6 +75,7 @@
 		E4AE4B4A270A817000C1C4CA /* CalendarViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewModel.swift; sourceTree = "<group>"; };
 		E4D92F06271C04B7002F054C /* Coordinator Protocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Coordinator Protocols.swift"; sourceTree = "<group>"; };
 		E4D92F08271C09C7002F054C /* DetailPushCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailPushCoordinator.swift; sourceTree = "<group>"; };
+		E4D92F0D271C1233002F054C /* DetailSceneMaker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailSceneMaker.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -155,6 +157,7 @@
 			children = (
 				E47EA15926F75C1600E793D4 /* App Cycle */,
 				E4D92F05271C0498002F054C /* Coordinator */,
+				E4D92F0C271C115A002F054C /* Scene Maker */,
 				E47EA15B26F75C3B00E793D4 /* View */,
 				E4AE4B49270A815400C1C4CA /* ViewModel */,
 				E47EA15D26F762F000E793D4 /* Model */,
@@ -238,6 +241,14 @@
 			path = Coordinator;
 			sourceTree = "<group>";
 		};
+		E4D92F0C271C115A002F054C /* Scene Maker */ = {
+			isa = PBXGroup;
+			children = (
+				E4D92F0D271C1233002F054C /* DetailSceneMaker.swift */,
+			);
+			path = "Scene Maker";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -309,6 +320,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E4675EA326FC6EA700E6A711 /* DateFormatter.swift in Sources */,
+				E4D92F0E271C1233002F054C /* DetailSceneMaker.swift in Sources */,
 				E43E168C2718544600A8FC58 /* BooklendarCollectionView.swift in Sources */,
 				E408A4CB27018C5A003E8521 /* UICollectionViewCell + Reusable.swift in Sources */,
 				E43E1694271A4F2E00A8FC58 /* ViewModelIncludable.swift in Sources */,

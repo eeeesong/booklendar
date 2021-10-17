@@ -15,7 +15,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let navigationController = UINavigationController(rootViewController: calendarViewController)
         let calendarManager = CalendarManager(routines: [:])
         let pushCoordinator = DetailPushCoordinator(navigationController: navigationController)
-        let calendarViewModel = CalendarViewModel(calendarManager: calendarManager, pushCoordinator: pushCoordinator)
+        let sceneMaker = DetailSceneMaker()
+        let calendarViewModel = CalendarViewModel(calendarManager: calendarManager, pushCoordinator: pushCoordinator, sceneMaker: sceneMaker)
         calendarViewController.set(calendarViewModel)
         window?.rootViewController = navigationController
     }
