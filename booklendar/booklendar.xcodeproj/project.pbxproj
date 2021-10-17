@@ -39,6 +39,7 @@
 		E4D92F07271C04B7002F054C /* Coordinator Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4D92F06271C04B7002F054C /* Coordinator Protocols.swift */; };
 		E4D92F09271C09C7002F054C /* DetailPushCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4D92F08271C09C7002F054C /* DetailPushCoordinator.swift */; };
 		E4D92F0E271C1233002F054C /* DetailSceneMaker.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4D92F0D271C1233002F054C /* DetailSceneMaker.swift */; };
+		E4D92F12271C13B4002F054C /* InitialSceneMaker.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4D92F11271C13B4002F054C /* InitialSceneMaker.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -76,6 +77,7 @@
 		E4D92F06271C04B7002F054C /* Coordinator Protocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Coordinator Protocols.swift"; sourceTree = "<group>"; };
 		E4D92F08271C09C7002F054C /* DetailPushCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailPushCoordinator.swift; sourceTree = "<group>"; };
 		E4D92F0D271C1233002F054C /* DetailSceneMaker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailSceneMaker.swift; sourceTree = "<group>"; };
+		E4D92F11271C13B4002F054C /* InitialSceneMaker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialSceneMaker.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -244,6 +246,7 @@
 		E4D92F0C271C115A002F054C /* Scene Maker */ = {
 			isa = PBXGroup;
 			children = (
+				E4D92F11271C13B4002F054C /* InitialSceneMaker.swift */,
 				E4D92F0D271C1233002F054C /* DetailSceneMaker.swift */,
 			);
 			path = "Scene Maker";
@@ -333,6 +336,7 @@
 				E43E168A27184BA100A8FC58 /* DetailHeaderCollectionViewCell.swift in Sources */,
 				E47EA14626F75BE000E793D4 /* AppDelegate.swift in Sources */,
 				E43E16822716B67B00A8FC58 /* DetailViewController.swift in Sources */,
+				E4D92F12271C13B4002F054C /* InitialSceneMaker.swift in Sources */,
 				E4D92F07271C04B7002F054C /* Coordinator Protocols.swift in Sources */,
 				E45353DE2702CF9F0014E2C1 /* CalendarDataSource.swift in Sources */,
 				E45353DC2702CD8E0014E2C1 /* MonthlyCalendarDrawer.swift in Sources */,

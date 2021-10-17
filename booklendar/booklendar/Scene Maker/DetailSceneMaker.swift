@@ -7,7 +7,13 @@
 
 import UIKit
 
-class DetailSceneMaker {
+final class DetailSceneMaker {
+    private let calendarManager: CalendarManagable
+    
+    init(calendarManaer: CalendarManagable) {
+        self.calendarManager = calendarManaer
+    }
+    
     func create(with info: Routine?) -> DetailViewController {
         var detailViewController = DetailViewController()
         let tempRecord = DayRecord(day: Day(isFuture: false, date: Date(), isEmpty: false),
