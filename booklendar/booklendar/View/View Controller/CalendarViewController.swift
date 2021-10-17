@@ -89,12 +89,7 @@ final class CalendarViewController: UIViewController, ViewModelIncludable {
             let newMonth = viewModel.newCalendarNeeded()
             newMonthLoaded(newMonth)
         case .selectedAt(let indexPath):
-            var nextVC = DetailViewController()
-            let tempRecord = DayRecord(day: Day(isFuture: false, date: Date(), isEmpty: false),
-                                       record: Record(order: 0, book: Book(recentlyAdded: Date(), id: "", coverUrl: "", title: "SAVAGE", authors: ["에스파","이수만"], translators: [], publisher: "", page: 400), comment: "oh my gosh~"))
-            let viewModel = DetailViewModel(currentRecord: tempRecord)
-            nextVC.set(viewModel)
-            navigationController?.pushViewController(nextVC, animated: true)
+            viewModel.calendarCellSelected(at: indexPath)
         }
     }
 }

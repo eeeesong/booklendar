@@ -8,7 +8,7 @@
 import Foundation
 
 protocol CalendarManagable {
-    func allRecords(for date: Date) -> [Record]?
+    func allRecords(at month: Int, _ day: Int) -> Routine?
     func loadLastData() -> [DayRecord]
 }
 
@@ -21,13 +21,15 @@ final class CalendarManager: CalendarManagable {
         self.routines = routines
     }
     
-    func allRecords(for date: Date) -> [Record]? {
-        let dateKey = DateFormatter.dateToString(format: DateFormat.dateKey, date: date)
+    func allRecords(at month: Int, _ day: Int) -> Routine? {
+        let targetDay = months[month][day]
         
-        guard let day = routines[dateKey] else {
+        guard let date = targetDay.date else {
             return nil
         }
-        return day.all()
+        
+        let dateKey = DateFormatter.dateToString(format: DateFormat.dateKey, date: date)
+        return routines[dateKey]
     }
     
     func loadLastData() -> [DayRecord] {

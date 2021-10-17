@@ -11,13 +11,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     var window: UIWindow?
     
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
-        let calendarManager = CalendarManager(routines: [:])
-        let calendarViewModel = CalendarViewModel(calendarManager: calendarManager)
         var calendarViewController = CalendarViewController()
-        calendarViewController.set(calendarViewModel)
         let navigationController = UINavigationController(rootViewController: calendarViewController)
+        let calendarManager = CalendarManager(routines: [:])
+        let pushCoordinator = DetailPushCoordinator(navigationController: navigationController)
+        let calendarViewModel = CalendarViewModel(calendarManager: calendarManager, pushCoordinator: pushCoordinator)
+        calendarViewController.set(calendarViewModel)
         window?.rootViewController = navigationController
     }
 }
-
-

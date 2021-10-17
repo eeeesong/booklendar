@@ -37,6 +37,7 @@
 		E47EA15F26F7630000E793D4 /* CalendarManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E47EA15E26F7630000E793D4 /* CalendarManager.swift */; };
 		E4AE4B4B270A817000C1C4CA /* CalendarViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4AE4B4A270A817000C1C4CA /* CalendarViewModel.swift */; };
 		E4D92F07271C04B7002F054C /* Coordinator Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4D92F06271C04B7002F054C /* Coordinator Protocols.swift */; };
+		E4D92F09271C09C7002F054C /* DetailPushCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4D92F08271C09C7002F054C /* DetailPushCoordinator.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -72,6 +73,7 @@
 		E47EA15E26F7630000E793D4 /* CalendarManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarManager.swift; sourceTree = "<group>"; };
 		E4AE4B4A270A817000C1C4CA /* CalendarViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewModel.swift; sourceTree = "<group>"; };
 		E4D92F06271C04B7002F054C /* Coordinator Protocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Coordinator Protocols.swift"; sourceTree = "<group>"; };
+		E4D92F08271C09C7002F054C /* DetailPushCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailPushCoordinator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -231,6 +233,7 @@
 			isa = PBXGroup;
 			children = (
 				E4D92F06271C04B7002F054C /* Coordinator Protocols.swift */,
+				E4D92F08271C09C7002F054C /* DetailPushCoordinator.swift */,
 			);
 			path = Coordinator;
 			sourceTree = "<group>";
@@ -310,6 +313,7 @@
 				E408A4CB27018C5A003E8521 /* UICollectionViewCell + Reusable.swift in Sources */,
 				E43E1694271A4F2E00A8FC58 /* ViewModelIncludable.swift in Sources */,
 				E408A4C627018209003E8521 /* FramedImageView.swift in Sources */,
+				E4D92F09271C09C7002F054C /* DetailPushCoordinator.swift in Sources */,
 				E47EA14A26F75BE000E793D4 /* CalendarViewController.swift in Sources */,
 				E43E16902719097900A8FC58 /* DetailCollectionViewDrawer.swift in Sources */,
 				E4675E9F26FC342200E6A711 /* Routine.swift in Sources */,

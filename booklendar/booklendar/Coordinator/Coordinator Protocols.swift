@@ -7,13 +7,14 @@
 
 import UIKit
 
-protocol PopCoordinator {
+protocol PopCoordinator: AnyObject {
     associatedtype State
     func pop(with state: State)
 }
 
-protocol PushCoordinator {
+protocol PushCoordinator: AnyObject {
     associatedtype Info
     associatedtype Target: UIViewController
-    func push(with info: Info, to targetViewController: Target)
+    typealias SceneMaker = (Info) -> Target
+    func push(with info: Info, sceneMaker: SceneMaker)
 }
