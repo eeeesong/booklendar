@@ -40,6 +40,8 @@
 		E4D92F09271C09C7002F054C /* DetailPushCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4D92F08271C09C7002F054C /* DetailPushCoordinator.swift */; };
 		E4D92F0E271C1233002F054C /* DetailSceneMaker.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4D92F0D271C1233002F054C /* DetailSceneMaker.swift */; };
 		E4D92F12271C13B4002F054C /* InitialSceneMaker.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4D92F11271C13B4002F054C /* InitialSceneMaker.swift */; };
+		E4D92F16271D19F4002F054C /* CommonPopCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4D92F15271D19F4002F054C /* CommonPopCoordinator.swift */; };
+		E4D92F18271D1B61002F054C /* NewStateAcceptable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4D92F17271D1B61002F054C /* NewStateAcceptable.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -78,6 +80,8 @@
 		E4D92F08271C09C7002F054C /* DetailPushCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailPushCoordinator.swift; sourceTree = "<group>"; };
 		E4D92F0D271C1233002F054C /* DetailSceneMaker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailSceneMaker.swift; sourceTree = "<group>"; };
 		E4D92F11271C13B4002F054C /* InitialSceneMaker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialSceneMaker.swift; sourceTree = "<group>"; };
+		E4D92F15271D19F4002F054C /* CommonPopCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonPopCoordinator.swift; sourceTree = "<group>"; };
+		E4D92F17271D1B61002F054C /* NewStateAcceptable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewStateAcceptable.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -182,6 +186,7 @@
 			isa = PBXGroup;
 			children = (
 				E43E1693271A4F2E00A8FC58 /* ViewModelIncludable.swift */,
+				E4D92F17271D1B61002F054C /* NewStateAcceptable.swift */,
 				E47EA14926F75BE000E793D4 /* CalendarViewController.swift */,
 				E45353DD2702CF9F0014E2C1 /* CalendarDataSource.swift */,
 				E45353DB2702CD8E0014E2C1 /* MonthlyCalendarDrawer.swift */,
@@ -238,6 +243,7 @@
 			isa = PBXGroup;
 			children = (
 				E4D92F06271C04B7002F054C /* Coordinator Protocols.swift */,
+				E4D92F15271D19F4002F054C /* CommonPopCoordinator.swift */,
 				E4D92F08271C09C7002F054C /* DetailPushCoordinator.swift */,
 			);
 			path = Coordinator;
@@ -324,6 +330,7 @@
 			files = (
 				E4675EA326FC6EA700E6A711 /* DateFormatter.swift in Sources */,
 				E4D92F0E271C1233002F054C /* DetailSceneMaker.swift in Sources */,
+				E4D92F18271D1B61002F054C /* NewStateAcceptable.swift in Sources */,
 				E43E168C2718544600A8FC58 /* BooklendarCollectionView.swift in Sources */,
 				E408A4CB27018C5A003E8521 /* UICollectionViewCell + Reusable.swift in Sources */,
 				E43E1694271A4F2E00A8FC58 /* ViewModelIncludable.swift in Sources */,
@@ -331,6 +338,7 @@
 				E4D92F09271C09C7002F054C /* DetailPushCoordinator.swift in Sources */,
 				E47EA14A26F75BE000E793D4 /* CalendarViewController.swift in Sources */,
 				E43E16902719097900A8FC58 /* DetailCollectionViewDrawer.swift in Sources */,
+				E4D92F16271D19F4002F054C /* CommonPopCoordinator.swift in Sources */,
 				E4675E9F26FC342200E6A711 /* Routine.swift in Sources */,
 				E408A4C027017F74003E8521 /* MonthlyCalendarCollectionViewCell.swift in Sources */,
 				E43E168A27184BA100A8FC58 /* DetailHeaderCollectionViewCell.swift in Sources */,

@@ -93,3 +93,9 @@ final class CalendarViewController: UIViewController, ViewModelIncludable {
         }
     }
 }
+
+extension CalendarViewController: NewStateAcceptable {
+    func accept<State>(newState: State) {
+        print(newState)
+    }
+}
