@@ -25,8 +25,6 @@ final class DetailViewController: UIViewController, ViewModelIncludable {
                                          style: .plain,
                                          target: self,
                                          action: #selector(backButtonTouched))
-        navigationItem.hidesBackButton = true
-        navigationItem.leftBarButtonItem = backButton
         return backButton
     }()
     
@@ -50,6 +48,7 @@ final class DetailViewController: UIViewController, ViewModelIncludable {
     private func configure() {
         view.backgroundColor = .white
         addCommentView()
+        setNavigationButton()
     }
 
     private func addCommentView() {
@@ -61,6 +60,11 @@ final class DetailViewController: UIViewController, ViewModelIncludable {
             detailCollectionView.topAnchor.constraint(equalTo: view.topAnchor, constant: 20),
             detailCollectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20)
         ])
+    }
+    
+    private func setNavigationButton() {
+        navigationItem.hidesBackButton = true
+        navigationItem.leftBarButtonItem = backButton
     }
     
     private func setDetailViewHelpers() {
