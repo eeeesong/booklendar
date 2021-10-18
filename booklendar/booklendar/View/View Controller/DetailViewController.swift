@@ -20,6 +20,16 @@ final class DetailViewController: UIViewController, ViewModelIncludable {
         return collectionView
     }()
     
+    private lazy var backButton: UIBarButtonItem = {
+        let backButton = UIBarButtonItem(image: .init(systemName: "arrowshape.turn.up.backward.fill"),
+                                         style: .plain,
+                                         target: self,
+                                         action: #selector(backButtonTouched))
+        navigationItem.hidesBackButton = true
+        navigationItem.leftBarButtonItem = backButton
+        return backButton
+    }()
+    
     // View Helpers
     private var detailCollectionViewDrawer: DetailCollectionViewDrawer?
     private var detailCollectionViewDataSource: DetailCollectionViewDataSource?
@@ -59,5 +69,9 @@ final class DetailViewController: UIViewController, ViewModelIncludable {
         
         detailCollectionViewDataSource = DetailCollectionViewDataSource(dayRecord: viewModel?.initialData())
         detailCollectionView.dataSource = detailCollectionViewDataSource
+    }
+    
+    @objc func backButtonTouched(_ sender: UIBarButtonItem) {
+        viewModel?.editingFinished()
     }
 }

@@ -13,7 +13,7 @@ final class InitialSceneMaker {
         let navigationController = UINavigationController(rootViewController: calendarViewController)
         let calendarManager = CalendarManager(routines: info)
         let pushCoordinator = DetailPushCoordinator(navigationController: navigationController)
-        let sceneMaker = DetailSceneMaker(calendarManaer: calendarManager)
+        let sceneMaker = DetailSceneMaker(calendarManaer: calendarManager, navigationController: navigationController)
         let calendarViewModel = CalendarViewModel(calendarManager: calendarManager,
                                                   pushCoordinator: pushCoordinator,
                                                   sceneMaker: sceneMaker)
