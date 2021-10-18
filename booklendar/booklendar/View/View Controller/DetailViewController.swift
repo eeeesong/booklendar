@@ -67,7 +67,8 @@ final class DetailViewController: UIViewController, ViewModelIncludable {
         detailCollectionViewDrawer = DetailCollectionViewDrawer()
         detailCollectionView.delegate = detailCollectionViewDrawer
         
-        detailCollectionViewDataSource = DetailCollectionViewDataSource(dayRecord: viewModel?.initialData())
+        guard let details = viewModel?.initialData() else { return }
+        detailCollectionViewDataSource = DetailCollectionViewDataSource(date: details.date, records: details.records)
         detailCollectionView.dataSource = detailCollectionViewDataSource
     }
     

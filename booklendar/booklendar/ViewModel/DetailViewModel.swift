@@ -8,7 +8,7 @@
 import Foundation
 
 protocol DetailViewModelType {
-    func initialData() -> DayRecord
+    func initialData() -> Routine
     func newBookSelected(_ book: Book)
     func newCommentAdded(_ comment: String)
     func editingFinished()
@@ -17,27 +17,27 @@ protocol DetailViewModelType {
 final class DetailViewModel: DetailViewModelType {
     
     typealias DetailPopCoordinator = CommonPopCoordinator<Bool>
-    private(set) var dayRecord: DayRecord
+    private var currentDetails: Routine
     private var popCoordinator: DetailPopCoordinator
     private var viewNeedsUpdate = false
     
-    init(currentRecord: DayRecord, popCoordinator: DetailPopCoordinator) {
-        self.dayRecord = currentRecord
+    init(currentDetails: Routine, popCoordinator: DetailPopCoordinator) {
+        self.currentDetails = currentDetails
         self.popCoordinator = popCoordinator
     }
     
-    func initialData() -> DayRecord {
-        return dayRecord
+    func initialData() -> Routine {
+        return currentDetails
     }
     
     func newBookSelected(_ book: Book) {
         let newRecord = Record(order: 0, book: book, comment: "")
-        dayRecord.record = newRecord
+        currentDetails.records.append(newRecord)
         viewNeedsUpdate = true
     }
     
     func newCommentAdded(_ comment: String) {
-        dayRecord.record?.comment = comment
+        currentDetails.records[0].comment = comment
         viewNeedsUpdate = true
     }
     
