@@ -9,12 +9,10 @@ import UIKit
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     var window: UIWindow?
+    private let initialSceneMaker = InitialSceneMaker()
     
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
-        let calendarViewController = CalendarViewController()
-        let calendarViewModel = CalendarViewModel()
-        calendarViewController.set(calendarViewModel)
-        let navigationController = UINavigationController(rootViewController: calendarViewController)
-        window?.rootViewController = navigationController
+        let savedDate = [String: Routine]()
+        window?.rootViewController = initialSceneMaker.create(with: savedDate)
     }
 }

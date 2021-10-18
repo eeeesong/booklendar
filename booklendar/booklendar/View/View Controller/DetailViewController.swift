@@ -7,17 +7,25 @@
 
 import UIKit
 
-final class DetailViewController: UIViewController {
+final class DetailViewController: UIViewController, ViewModelIncludable {
     
     // View
-    private lazy var detailCollectionView: BooklendarCollectionView<CommentCollectionViewCell,
-                                                                     DetailHeaderCollectionViewCell> = {
+    typealias DetailCollectionView = BooklendarCollectionView<CommentCollectionViewCell,
+                                                              DetailHeaderCollectionViewCell>
+    private lazy var detailCollectionView: DetailCollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.minimumInteritemSpacing = 0
         layout.minimumLineSpacing = 0
-        let collectionView = BooklendarCollectionView<CommentCollectionViewCell,
-                                                      DetailHeaderCollectionViewCell> (frame: .zero, collectionViewLayout: layout)
+        let collectionView = DetailCollectionView(frame: .zero, collectionViewLayout: layout)
         return collectionView
+    }()
+    
+    private lazy var backButton: UIBarButtonItem = {
+        let backButton = UIBarButtonItem(image: .init(systemName: "arrowshape.turn.up.backward.fill"),
+                                         style: .plain,
+                                         target: self,
+                                         action: #selector(backButtonTouched))
+        return backButton
     }()
     
     // View Helpers
@@ -25,7 +33,7 @@ final class DetailViewController: UIViewController {
     private var detailCollectionViewDataSource: DetailCollectionViewDataSource?
 
     // View Model
-    private var viewModel: DetailViewModelType?
+    var viewModel: DetailViewModelType?
     
     override func loadView() {
         super.loadView()
@@ -40,6 +48,7 @@ final class DetailViewController: UIViewController {
     private func configure() {
         view.backgroundColor = .white
         addCommentView()
+        setNavigationButton()
     }
 
     private func addCommentView() {
@@ -53,15 +62,21 @@ final class DetailViewController: UIViewController {
         ])
     }
     
+    private func setNavigationButton() {
+        navigationItem.hidesBackButton = true
+        navigationItem.leftBarButtonItem = backButton
+    }
+    
     private func setDetailViewHelpers() {
         detailCollectionViewDrawer = DetailCollectionViewDrawer()
         detailCollectionView.delegate = detailCollectionViewDrawer
         
-        detailCollectionViewDataSource = DetailCollectionViewDataSource(dayRecord: viewModel?.initialData())
+        guard let details = viewModel?.initialData() else { return }
+        detailCollectionViewDataSource = DetailCollectionViewDataSource(date: details.date, records: details.records)
         detailCollectionView.dataSource = detailCollectionViewDataSource
     }
     
-    func set(_ viewModel: DetailViewModelType) {
-        self.viewModel = viewModel
+    @objc func backButtonTouched(_ sender: UIBarButtonItem) {
+        viewModel?.editingFinished()
     }
 }

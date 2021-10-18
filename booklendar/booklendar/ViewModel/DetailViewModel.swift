@@ -8,29 +8,40 @@
 import Foundation
 
 protocol DetailViewModelType {
-    func initialData() -> DayRecord
+    func initialData() -> Routine
     func newBookSelected(_ book: Book)
     func newCommentAdded(_ comment: String)
+    func editingFinished()
 }
 
 final class DetailViewModel: DetailViewModelType {
     
-    private(set) var dayRecord: DayRecord
+    typealias DetailPopCoordinator = CommonPopCoordinator<Bool>
+    private var currentDetails: Routine
+    private var popCoordinator: DetailPopCoordinator
+    private var viewNeedsUpdate = false
     
-    init(currentRecord: DayRecord) {
-        self.dayRecord = currentRecord
+    init(currentDetails: Routine, popCoordinator: DetailPopCoordinator) {
+        self.currentDetails = currentDetails
+        self.popCoordinator = popCoordinator
     }
     
-    func initialData() -> DayRecord {
-        return dayRecord
+    func initialData() -> Routine {
+        return currentDetails
     }
     
     func newBookSelected(_ book: Book) {
         let newRecord = Record(order: 0, book: book, comment: "")
-        dayRecord.record = newRecord
+        currentDetails.records.append(newRecord)
+        viewNeedsUpdate = true
     }
     
     func newCommentAdded(_ comment: String) {
-        dayRecord.record?.comment = comment
+        currentDetails.records[0].comment = comment
+        viewNeedsUpdate = true
+    }
+    
+    func editingFinished() {
+        popCoordinator.pop(with: viewNeedsUpdate)
     }
 }
