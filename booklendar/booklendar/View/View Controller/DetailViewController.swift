@@ -28,6 +28,14 @@ final class DetailViewController: UIViewController, ViewModelIncludable {
         return backButton
     }()
     
+    private lazy var editButton: UIBarButtonItem = {
+        let editButton = UIBarButtonItem(image: .init(systemName: "pencil"),
+                                         style: .plain,
+                                         target: self,
+                                         action: #selector(editButtonTouched))
+        return editButton
+    }()
+    
     // View Helpers
     private var detailCollectionViewDrawer: DetailCollectionViewDrawer?
     private var detailCollectionViewDataSource: DetailCollectionViewDataSource?
@@ -65,6 +73,7 @@ final class DetailViewController: UIViewController, ViewModelIncludable {
     private func setNavigationButton() {
         navigationItem.hidesBackButton = true
         navigationItem.leftBarButtonItem = backButton
+        navigationItem.rightBarButtonItem = editButton
     }
     
     private func setDetailViewHelpers() {
@@ -78,5 +87,9 @@ final class DetailViewController: UIViewController, ViewModelIncludable {
     
     @objc func backButtonTouched(_ sender: UIBarButtonItem) {
         viewModel?.editingFinished()
+    }
+    
+    @objc func editButtonTouched(_ sender: UIBarButtonItem) {
+        viewModel?.startToEdit()
     }
 }

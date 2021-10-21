@@ -11,6 +11,7 @@ protocol DetailViewModelType {
     func initialData() -> Routine
     func newBookSelected(_ book: Book)
     func newCommentAdded(_ comment: String)
+    func startToEdit()
     func editingFinished()
 }
 
@@ -39,6 +40,10 @@ final class DetailViewModel: DetailViewModelType {
     func newCommentAdded(_ comment: String) {
         currentDetails.records[0].comment = comment
         viewNeedsUpdate = true
+    }
+    
+    func startToEdit() {
+        
     }
     
     func editingFinished() {
