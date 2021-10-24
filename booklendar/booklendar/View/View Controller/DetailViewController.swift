@@ -84,10 +84,12 @@ final class DetailViewController: UIViewController, ViewModelIncludable {
     @objc func editButtonTouched(_ sender: UIBarButtonItem) {
         viewModel?.editStateChanged(to: .doing)
         navigationItem.rightBarButtonItem = doneButton
+        detailView.searchMode(isOn: true)
     }
     
     @objc func doneButtonTouched(_ sender: UIBarButtonItem) {
         viewModel?.editStateChanged(to: .done)
         navigationItem.rightBarButtonItem = editButton
+        detailView.searchMode(isOn: false)
     }
 }

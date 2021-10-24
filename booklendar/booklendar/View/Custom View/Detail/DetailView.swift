@@ -125,4 +125,9 @@ final class DetailView: UIView {
         titleLabel.text = book?.title
         authorLabel.text = book?.authors.joined(separator: ", ")
     }
+    
+    func searchMode(isOn: Bool) {
+        let frameMode: FramedImageView.FrameMode = isOn ? .searchEnabled : .normal
+        imageFrame.changeMode(to: frameMode)
+    }
 }
