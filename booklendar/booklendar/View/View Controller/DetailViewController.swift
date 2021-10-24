@@ -10,16 +10,8 @@ import UIKit
 final class DetailViewController: UIViewController, ViewModelIncludable {
     
     // View
-    typealias DetailCollectionView = BooklendarCollectionView<CommentCollectionViewCell,
-                                                              DetailHeaderCollectionViewCell>
-    private lazy var detailCollectionView: DetailCollectionView = {
-        let layout = UICollectionViewFlowLayout()
-        layout.minimumInteritemSpacing = 0
-        layout.minimumLineSpacing = 0
-        let collectionView = DetailCollectionView(frame: .zero, collectionViewLayout: layout)
-        return collectionView
-    }()
-    
+    private lazy var detailView = DetailView()
+
     private lazy var backButton: UIBarButtonItem = {
         let backButton = UIBarButtonItem(image: .init(systemName: "arrowshape.turn.up.backward.fill"),
                                          style: .plain,
@@ -43,10 +35,6 @@ final class DetailViewController: UIViewController, ViewModelIncludable {
                                          action: #selector(doneButtonTouched))
         return doneButton
     }()
-    
-    // View Helpers
-    private var detailCollectionViewDrawer: DetailCollectionViewDrawer?
-    private var detailCollectionViewDataSource: DetailCollectionViewDataSource?
 
     // View Model
     var viewModel: DetailViewModelType?
@@ -58,23 +46,23 @@ final class DetailViewController: UIViewController, ViewModelIncludable {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setDetailViewHelpers()
+        setInitialData()
     }
     
     private func configure() {
         view.backgroundColor = .white
-        addCommentView()
+        addDetailView()
         setNavigationButton()
     }
 
-    private func addCommentView() {
-        view.addSubview(detailCollectionView)
+    private func addDetailView() {
+        view.addSubview(detailView)
         
         NSLayoutConstraint.activate([
-            detailCollectionView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            detailCollectionView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.95),
-            detailCollectionView.topAnchor.constraint(equalTo: view.topAnchor, constant: 20),
-            detailCollectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20)
+            detailView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            detailView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.95),
+            detailView.topAnchor.constraint(equalTo: view.topAnchor, constant: 20),
+            detailView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20)
         ])
     }
     
@@ -84,13 +72,9 @@ final class DetailViewController: UIViewController, ViewModelIncludable {
         navigationItem.rightBarButtonItem = editButton
     }
     
-    private func setDetailViewHelpers() {
-        detailCollectionViewDrawer = DetailCollectionViewDrawer()
-        detailCollectionView.delegate = detailCollectionViewDrawer
-        
+    private func setInitialData() {
         guard let details = viewModel?.initialData() else { return }
-        detailCollectionViewDataSource = DetailCollectionViewDataSource(date: details.date, records: details.records)
-        detailCollectionView.dataSource = detailCollectionViewDataSource
+        detailView.configure(with: "2021. 10. 24", details.records[0].book)
     }
     
     @objc func backButtonTouched(_ sender: UIBarButtonItem) {
