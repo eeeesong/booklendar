@@ -7,6 +7,12 @@
 
 import UIKit
 
+typealias DetailHandler = (DetailAction) -> Void
+
+enum DetailAction {
+    case searchButtonTouched
+}
+
 final class DetailView: UIView {
     
     private lazy var dateLabel: UILabel = {
@@ -32,6 +38,7 @@ final class DetailView: UIView {
         searchButton.tintColor = .white
         searchButton.translatesAutoresizingMaskIntoConstraints = false
         searchButton.isHidden = true
+        searchButton.addTarget(self, action: #selector(searchButtonTouched), for: .allTouchEvents)
         return searchButton
     }()
     
@@ -62,6 +69,8 @@ final class DetailView: UIView {
         textView.translatesAutoresizingMaskIntoConstraints = false
         return textView
     }()
+    
+    private var actionHandler: DetailHandler?
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
@@ -147,6 +156,10 @@ final class DetailView: UIView {
         ])
     }
     
+    func setActionHandler(_ actionHandler: @escaping DetailHandler) {
+        self.actionHandler = actionHandler
+    }
+    
     func configure(with dateString: String,_ book: Book?) {
         dateLabel.text = dateString
         titleLabel.text = book?.title
@@ -156,5 +169,9 @@ final class DetailView: UIView {
     func searchMode(isOn: Bool) {
         commentTextView.isEditable = isOn
         searchButton.isHidden = !isOn
+    }
+    
+    @objc private func searchButtonTouched(_ sender: UIButton) {
+        actionHandler?(.searchButtonTouched)
     }
 }

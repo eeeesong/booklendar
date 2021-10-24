@@ -53,6 +53,7 @@ final class DetailViewController: UIViewController, ViewModelIncludable {
         view.backgroundColor = .white
         addDetailView()
         setNavigationButton()
+        detailView.setActionHandler(viewNeedsChanges)
     }
 
     private func addDetailView() {
@@ -93,5 +94,14 @@ final class DetailViewController: UIViewController, ViewModelIncludable {
         detailView.searchMode(isOn: false)
         let currentComment = detailView.commentTextView.text ?? ""
         viewModel?.newCommentAdded(currentComment)
+    }
+    
+    func viewNeedsChanges(with action: DetailAction) {
+        guard let viewModel = viewModel else { return }
+        
+        switch action {
+        case .searchButtonTouched:
+            viewModel.searchStarted()
+        }
     }
 }

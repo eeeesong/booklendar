@@ -9,6 +9,7 @@ import Foundation
 
 protocol DetailViewModelType {
     func initialData() -> Routine
+    func searchStarted()
     func newBookSelected(_ book: Book)
     func newCommentAdded(_ comment: String)
     func editStateChanged(to state: DetailEditState)
@@ -34,6 +35,10 @@ final class DetailViewModel: DetailViewModelType {
     
     func initialData() -> Routine {
         return currentDetails
+    }
+    
+    func searchStarted() {
+        print("검색 모달 띄우기")
     }
     
     func newBookSelected(_ book: Book) {
