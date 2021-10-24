@@ -91,5 +91,7 @@ final class DetailViewController: UIViewController, ViewModelIncludable {
         viewModel?.editStateChanged(to: .done)
         navigationItem.rightBarButtonItem = editButton
         detailView.searchMode(isOn: false)
+        let currentComment = detailView.commentTextView.text ?? ""
+        viewModel?.newCommentAdded(currentComment)
     }
 }

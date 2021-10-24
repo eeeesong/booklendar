@@ -40,7 +40,7 @@ final class DetailView: UIView {
         return label
     }()
     
-    private lazy var commentTextView: UITextView = {
+    private(set) lazy var commentTextView: UITextView = {
         let textView = UITextView()
         textView.font = UIFont.body()
         textView.textAlignment = .left
@@ -127,6 +127,7 @@ final class DetailView: UIView {
     }
     
     func searchMode(isOn: Bool) {
+        commentTextView.isEditable = isOn
         let frameMode: FramedImageView.FrameMode = isOn ? .searchEnabled : .normal
         imageFrame.changeMode(to: frameMode)
     }
