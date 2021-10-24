@@ -24,6 +24,17 @@ final class DetailView: UIView {
         return imageView
     }()
     
+    private lazy var searchButton: UIButton = {
+        let searchButton = UIButton()
+        searchButton.backgroundColor = UIColor(white: 0.5, alpha: 0.5)
+        let searchImage = UIImage(systemName: "magnifyingglass")
+        searchButton.setImage(searchImage, for: .normal)
+        searchButton.tintColor = .white
+        searchButton.translatesAutoresizingMaskIntoConstraints = false
+        searchButton.isHidden = true
+        return searchButton
+    }()
+    
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.bookTitle()
@@ -66,6 +77,7 @@ final class DetailView: UIView {
         translatesAutoresizingMaskIntoConstraints = false
         addDateLabel()
         addImageFrame()
+        addSearchButton()
         addbookInfoLabels()
         addCommentTextView()
     }
@@ -89,6 +101,21 @@ final class DetailView: UIView {
             imageFrame.heightAnchor.constraint(equalTo: imageFrame.widthAnchor, multiplier: 1.6),
             imageFrame.topAnchor.constraint(equalTo: dateLabel.bottomAnchor, constant: 20)
         ])
+    }
+    
+    private func addSearchButton() {
+        addSubview(searchButton)
+        
+        NSLayoutConstraint.activate([
+            searchButton.centerXAnchor.constraint(equalTo: imageFrame.centerXAnchor),
+            searchButton.centerYAnchor.constraint(equalTo: imageFrame.centerYAnchor),
+            searchButton.widthAnchor.constraint(equalTo: imageFrame.widthAnchor),
+            searchButton.heightAnchor.constraint(equalTo: imageFrame.heightAnchor)
+        ])
+    }
+    
+    private func removeSearchButton() {
+        searchButton.removeFromSuperview()
     }
     
     private func addbookInfoLabels() {
@@ -128,7 +155,6 @@ final class DetailView: UIView {
     
     func searchMode(isOn: Bool) {
         commentTextView.isEditable = isOn
-        let frameMode: FramedImageView.FrameMode = isOn ? .searchEnabled : .normal
-        imageFrame.changeMode(to: frameMode)
+        searchButton.isHidden = !isOn
     }
 }
