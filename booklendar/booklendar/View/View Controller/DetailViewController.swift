@@ -36,6 +36,14 @@ final class DetailViewController: UIViewController, ViewModelIncludable {
         return editButton
     }()
     
+    private lazy var doneButton: UIBarButtonItem = {
+        let doneButton = UIBarButtonItem(image: .init(systemName: "checkmark"),
+                                         style: .plain,
+                                         target: self,
+                                         action: #selector(doneButtonTouched))
+        return doneButton
+    }()
+    
     // View Helpers
     private var detailCollectionViewDrawer: DetailCollectionViewDrawer?
     private var detailCollectionViewDataSource: DetailCollectionViewDataSource?
@@ -90,6 +98,12 @@ final class DetailViewController: UIViewController, ViewModelIncludable {
     }
     
     @objc func editButtonTouched(_ sender: UIBarButtonItem) {
-        viewModel?.startToEdit()
+        viewModel?.editStateChanged(to: .doing)
+        navigationItem.rightBarButtonItem = doneButton
+    }
+    
+    @objc func doneButtonTouched(_ sender: UIBarButtonItem) {
+        viewModel?.editStateChanged(to: .done)
+        navigationItem.rightBarButtonItem = editButton
     }
 }

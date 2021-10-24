@@ -11,8 +11,13 @@ protocol DetailViewModelType {
     func initialData() -> Routine
     func newBookSelected(_ book: Book)
     func newCommentAdded(_ comment: String)
-    func startToEdit()
+    func editStateChanged(to state: DetailEditState)
     func editingFinished()
+}
+
+enum DetailEditState {
+    case doing
+    case done
 }
 
 final class DetailViewModel: DetailViewModelType {
@@ -42,8 +47,8 @@ final class DetailViewModel: DetailViewModelType {
         viewNeedsUpdate = true
     }
     
-    func startToEdit() {
-        
+    func editStateChanged(to state: DetailEditState) {
+
     }
     
     func editingFinished() {
