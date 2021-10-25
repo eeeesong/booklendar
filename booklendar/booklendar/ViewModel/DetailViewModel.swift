@@ -26,11 +26,15 @@ final class DetailViewModel: DetailViewModelType {
     typealias DetailPopCoordinator = CommonPopCoordinator<Bool>
     private var currentDetails: Routine
     private var popCoordinator: DetailPopCoordinator
+    private var searchPushCoordinator: SearchPushCoordinator
+    private var searchSceneMaker: SearchSceneMaker
     private var viewNeedsUpdate = false
     
-    init(currentDetails: Routine, popCoordinator: DetailPopCoordinator) {
+    init(currentDetails: Routine, popCoordinator: DetailPopCoordinator, searchPushCoordinator: SearchPushCoordinator, searchSceneMaker: SearchSceneMaker) {
         self.currentDetails = currentDetails
         self.popCoordinator = popCoordinator
+        self.searchPushCoordinator = searchPushCoordinator
+        self.searchSceneMaker = searchSceneMaker
     }
     
     func initialData() -> Routine {
@@ -38,7 +42,7 @@ final class DetailViewModel: DetailViewModelType {
     }
     
     func searchStarted() {
-        print("검색 모달 띄우기")
+        searchPushCoordinator.push(with: [], sceneMaker: searchSceneMaker.create)
     }
     
     func newBookSelected(_ book: Book) {
