@@ -38,7 +38,7 @@ final class DetailView: UIView {
         searchButton.tintColor = .white
         searchButton.translatesAutoresizingMaskIntoConstraints = false
         searchButton.isHidden = true
-        searchButton.addTarget(self, action: #selector(searchButtonTouched), for: .allTouchEvents)
+        searchButton.addTarget(self, action: #selector(searchButtonTouched), for: .touchUpInside)
         return searchButton
     }()
     
