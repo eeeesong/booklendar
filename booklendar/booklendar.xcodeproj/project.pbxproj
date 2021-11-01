@@ -202,13 +202,9 @@
 			children = (
 				E43E1693271A4F2E00A8FC58 /* ViewModelIncludable.swift */,
 				E4D92F17271D1B61002F054C /* NewStateAcceptable.swift */,
-				E47EA14926F75BE000E793D4 /* CalendarViewController.swift */,
-				E45353DD2702CF9F0014E2C1 /* CalendarDataSource.swift */,
-				E45353DB2702CD8E0014E2C1 /* MonthlyCalendarDrawer.swift */,
-				E43E16812716B67B00A8FC58 /* DetailViewController.swift */,
-				E4D92F1E27256F55002F054C /* SearchViewController.swift */,
-				E4A9DF81272F9D89002E0A9E /* BookTableViewDelegate.swift */,
-				E4A9DF83272F9D95002E0A9E /* BookTableViewDataSource.swift */,
+				E4A9DF85272FA8C9002E0A9E /* Calendar */,
+				E4A9DF86272FA8E0002E0A9E /* Detail */,
+				E4A9DF87272FA8EE002E0A9E /* Search */,
 			);
 			path = "View Controller";
 			sourceTree = "<group>";
@@ -254,6 +250,34 @@
 				E4A9DF7D272F8F2B002E0A9E /* BookTableViewCell.swift */,
 			);
 			path = "Search ";
+			sourceTree = "<group>";
+		};
+		E4A9DF85272FA8C9002E0A9E /* Calendar */ = {
+			isa = PBXGroup;
+			children = (
+				E47EA14926F75BE000E793D4 /* CalendarViewController.swift */,
+				E45353DD2702CF9F0014E2C1 /* CalendarDataSource.swift */,
+				E45353DB2702CD8E0014E2C1 /* MonthlyCalendarDrawer.swift */,
+			);
+			path = Calendar;
+			sourceTree = "<group>";
+		};
+		E4A9DF86272FA8E0002E0A9E /* Detail */ = {
+			isa = PBXGroup;
+			children = (
+				E43E16812716B67B00A8FC58 /* DetailViewController.swift */,
+			);
+			path = Detail;
+			sourceTree = "<group>";
+		};
+		E4A9DF87272FA8EE002E0A9E /* Search */ = {
+			isa = PBXGroup;
+			children = (
+				E4D92F1E27256F55002F054C /* SearchViewController.swift */,
+				E4A9DF81272F9D89002E0A9E /* BookTableViewDelegate.swift */,
+				E4A9DF83272F9D95002E0A9E /* BookTableViewDataSource.swift */,
+			);
+			path = Search;
 			sourceTree = "<group>";
 		};
 		E4AE4B49270A815400C1C4CA /* ViewModel */ = {
