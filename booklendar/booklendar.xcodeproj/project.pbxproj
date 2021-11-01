@@ -32,6 +32,9 @@
 		E47EA14F26F75BE200E793D4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E47EA14E26F75BE200E793D4 /* Assets.xcassets */; };
 		E47EA15226F75BE200E793D4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E47EA15026F75BE200E793D4 /* LaunchScreen.storyboard */; };
 		E47EA15F26F7630000E793D4 /* CalendarManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E47EA15E26F7630000E793D4 /* CalendarManager.swift */; };
+		E4A9DF7C272F8F17002E0A9E /* BookTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4A9DF7B272F8F17002E0A9E /* BookTableView.swift */; };
+		E4A9DF7E272F8F2B002E0A9E /* BookTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4A9DF7D272F8F2B002E0A9E /* BookTableViewCell.swift */; };
+		E4A9DF80272F9710002E0A9E /* UITableViewCell + Reusable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4A9DF7F272F9710002E0A9E /* UITableViewCell + Reusable.swift */; };
 		E4AE4B4B270A817000C1C4CA /* CalendarViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4AE4B4A270A817000C1C4CA /* CalendarViewModel.swift */; };
 		E4D92F07271C04B7002F054C /* Coordinator Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4D92F06271C04B7002F054C /* Coordinator Protocols.swift */; };
 		E4D92F09271C09C7002F054C /* DetailPushCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4D92F08271C09C7002F054C /* DetailPushCoordinator.swift */; };
@@ -74,6 +77,9 @@
 		E47EA15126F75BE200E793D4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E47EA15326F75BE200E793D4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E47EA15E26F7630000E793D4 /* CalendarManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarManager.swift; sourceTree = "<group>"; };
+		E4A9DF7B272F8F17002E0A9E /* BookTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookTableView.swift; sourceTree = "<group>"; };
+		E4A9DF7D272F8F2B002E0A9E /* BookTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookTableViewCell.swift; sourceTree = "<group>"; };
+		E4A9DF7F272F9710002E0A9E /* UITableViewCell + Reusable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableViewCell + Reusable.swift"; sourceTree = "<group>"; };
 		E4AE4B4A270A817000C1C4CA /* CalendarViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewModel.swift; sourceTree = "<group>"; };
 		E4D92F06271C04B7002F054C /* Coordinator Protocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Coordinator Protocols.swift"; sourceTree = "<group>"; };
 		E4D92F08271C09C7002F054C /* DetailPushCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailPushCoordinator.swift; sourceTree = "<group>"; };
@@ -105,6 +111,7 @@
 				E408A4C4270181F0003E8521 /* Frame */,
 				E408A4C3270181E7003E8521 /* Calendar */,
 				E4D92F1927255BC3002F054C /* Detail */,
+				E4A9DF7A272F8EF3002E0A9E /* Search  */,
 			);
 			path = "Custom View";
 			sourceTree = "<group>";
@@ -233,6 +240,16 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		E4A9DF7A272F8EF3002E0A9E /* Search  */ = {
+			isa = PBXGroup;
+			children = (
+				E4A9DF7B272F8F17002E0A9E /* BookTableView.swift */,
+				E4A9DF7F272F9710002E0A9E /* UITableViewCell + Reusable.swift */,
+				E4A9DF7D272F8F2B002E0A9E /* BookTableViewCell.swift */,
+			);
+			path = "Search ";
+			sourceTree = "<group>";
+		};
 		E4AE4B49270A815400C1C4CA /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
@@ -346,6 +363,7 @@
 				E4D92F0E271C1233002F054C /* DetailSceneMaker.swift in Sources */,
 				E4D92F18271D1B61002F054C /* NewStateAcceptable.swift in Sources */,
 				E43E168C2718544600A8FC58 /* BooklendarCollectionView.swift in Sources */,
+				E4A9DF7E272F8F2B002E0A9E /* BookTableViewCell.swift in Sources */,
 				E4D92F2127256F81002F054C /* SearchSceneMaker.swift in Sources */,
 				E408A4CB27018C5A003E8521 /* UICollectionViewCell + Reusable.swift in Sources */,
 				E43E1694271A4F2E00A8FC58 /* ViewModelIncludable.swift in Sources */,
@@ -355,6 +373,7 @@
 				E4D92F16271D19F4002F054C /* CommonPopCoordinator.swift in Sources */,
 				E4D92F1F27256F55002F054C /* SearchViewController.swift in Sources */,
 				E4675E9F26FC342200E6A711 /* Routine.swift in Sources */,
+				E4A9DF7C272F8F17002E0A9E /* BookTableView.swift in Sources */,
 				E4D92F1D27256E4B002F054C /* SearchPushCoordinator.swift in Sources */,
 				E4D92F2327256FD8002F054C /* SearchViewModel.swift in Sources */,
 				E408A4C027017F74003E8521 /* MonthlyCalendarCollectionViewCell.swift in Sources */,
@@ -369,6 +388,7 @@
 				E4675E9D26FB22D200E6A711 /* Record.swift in Sources */,
 				E4675EA126FC343500E6A711 /* Day.swift in Sources */,
 				E443FB072704549600DFF2E6 /* Size.swift in Sources */,
+				E4A9DF80272F9710002E0A9E /* UITableViewCell + Reusable.swift in Sources */,
 				E4AE4B4B270A817000C1C4CA /* CalendarViewModel.swift in Sources */,
 				E43E1688271825F100A8FC58 /* CommentCollectionViewCell.swift in Sources */,
 				E47EA14826F75BE000E793D4 /* SceneDelegate.swift in Sources */,

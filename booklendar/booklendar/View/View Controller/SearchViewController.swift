@@ -17,8 +17,8 @@ final class SearchViewController: UIViewController, ViewModelIncludable {
         return searchController
     }()
     
-    private var bookTableView: UITableView = {
-        let tableView = UITableView()
+    private var bookTableView: BookTableView = {
+        let tableView = BookTableView()
         tableView.backgroundColor = .white
         tableView.translatesAutoresizingMaskIntoConstraints = false
         return tableView
