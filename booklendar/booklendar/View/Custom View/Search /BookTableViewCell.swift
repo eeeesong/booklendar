@@ -72,4 +72,9 @@ final class BookTableViewCell: UITableViewCell {
             infoLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: -spacing)
         ])
     }
+    
+    func configure(with book: Book) {
+        titleLabel.text = book.title
+        infoLabel.text = book.authors.joined(separator: ",") + " / " + book.publisher
+    }
 }

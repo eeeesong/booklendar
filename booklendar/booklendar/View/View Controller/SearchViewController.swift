@@ -24,6 +24,10 @@ final class SearchViewController: UIViewController, ViewModelIncludable {
         return tableView
     }()
     
+    // View Helpers
+    private var bookTableViewDelegate: BookTableViewDelegate?
+    private var bookTableViewDataSource: BookTableViewDataSource?
+    
     // View Model
     var viewModel: SearchViewModel?
     typealias ViewModel = SearchViewModel
@@ -31,6 +35,11 @@ final class SearchViewController: UIViewController, ViewModelIncludable {
     override func loadView() {
         super.loadView()
         configure()
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        setBookTableViewHelpers()
     }
     
     private func configure() {
@@ -49,5 +58,18 @@ final class SearchViewController: UIViewController, ViewModelIncludable {
             bookTableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
             bookTableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor)
         ])
+    }
+    
+    private func setBookTableViewHelpers() {
+        bookTableViewDelegate = BookTableViewDelegate(actionHandler: viewNeedsChanges)
+        bookTableView.delegate = bookTableViewDelegate
+        
+        let tempBooks = [Book(recentlyAdded: Date(), id: "", coverUrl: "", title: "낮밤", authors: ["이영지", "박재범"], translators: [], publisher: "영쥐", page: 40)]
+        bookTableViewDataSource = BookTableViewDataSource(books: tempBooks)
+        bookTableView.dataSource = bookTableViewDataSource
+    }
+    
+    func viewNeedsChanges(with action: BookTableAction) {
+        print("뒤로 가기")
     }
 }

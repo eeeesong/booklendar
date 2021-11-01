@@ -35,6 +35,8 @@
 		E4A9DF7C272F8F17002E0A9E /* BookTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4A9DF7B272F8F17002E0A9E /* BookTableView.swift */; };
 		E4A9DF7E272F8F2B002E0A9E /* BookTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4A9DF7D272F8F2B002E0A9E /* BookTableViewCell.swift */; };
 		E4A9DF80272F9710002E0A9E /* UITableViewCell + Reusable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4A9DF7F272F9710002E0A9E /* UITableViewCell + Reusable.swift */; };
+		E4A9DF82272F9D89002E0A9E /* BookTableViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4A9DF81272F9D89002E0A9E /* BookTableViewDelegate.swift */; };
+		E4A9DF84272F9D95002E0A9E /* BookTableViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4A9DF83272F9D95002E0A9E /* BookTableViewDataSource.swift */; };
 		E4AE4B4B270A817000C1C4CA /* CalendarViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4AE4B4A270A817000C1C4CA /* CalendarViewModel.swift */; };
 		E4D92F07271C04B7002F054C /* Coordinator Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4D92F06271C04B7002F054C /* Coordinator Protocols.swift */; };
 		E4D92F09271C09C7002F054C /* DetailPushCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4D92F08271C09C7002F054C /* DetailPushCoordinator.swift */; };
@@ -80,6 +82,8 @@
 		E4A9DF7B272F8F17002E0A9E /* BookTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookTableView.swift; sourceTree = "<group>"; };
 		E4A9DF7D272F8F2B002E0A9E /* BookTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookTableViewCell.swift; sourceTree = "<group>"; };
 		E4A9DF7F272F9710002E0A9E /* UITableViewCell + Reusable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableViewCell + Reusable.swift"; sourceTree = "<group>"; };
+		E4A9DF81272F9D89002E0A9E /* BookTableViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookTableViewDelegate.swift; sourceTree = "<group>"; };
+		E4A9DF83272F9D95002E0A9E /* BookTableViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookTableViewDataSource.swift; sourceTree = "<group>"; };
 		E4AE4B4A270A817000C1C4CA /* CalendarViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewModel.swift; sourceTree = "<group>"; };
 		E4D92F06271C04B7002F054C /* Coordinator Protocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Coordinator Protocols.swift"; sourceTree = "<group>"; };
 		E4D92F08271C09C7002F054C /* DetailPushCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailPushCoordinator.swift; sourceTree = "<group>"; };
@@ -203,6 +207,8 @@
 				E45353DB2702CD8E0014E2C1 /* MonthlyCalendarDrawer.swift */,
 				E43E16812716B67B00A8FC58 /* DetailViewController.swift */,
 				E4D92F1E27256F55002F054C /* SearchViewController.swift */,
+				E4A9DF81272F9D89002E0A9E /* BookTableViewDelegate.swift */,
+				E4A9DF83272F9D95002E0A9E /* BookTableViewDataSource.swift */,
 			);
 			path = "View Controller";
 			sourceTree = "<group>";
@@ -363,11 +369,13 @@
 				E4D92F0E271C1233002F054C /* DetailSceneMaker.swift in Sources */,
 				E4D92F18271D1B61002F054C /* NewStateAcceptable.swift in Sources */,
 				E43E168C2718544600A8FC58 /* BooklendarCollectionView.swift in Sources */,
+				E4A9DF84272F9D95002E0A9E /* BookTableViewDataSource.swift in Sources */,
 				E4A9DF7E272F8F2B002E0A9E /* BookTableViewCell.swift in Sources */,
 				E4D92F2127256F81002F054C /* SearchSceneMaker.swift in Sources */,
 				E408A4CB27018C5A003E8521 /* UICollectionViewCell + Reusable.swift in Sources */,
 				E43E1694271A4F2E00A8FC58 /* ViewModelIncludable.swift in Sources */,
 				E408A4C627018209003E8521 /* FramedImageView.swift in Sources */,
+				E4A9DF82272F9D89002E0A9E /* BookTableViewDelegate.swift in Sources */,
 				E4D92F09271C09C7002F054C /* DetailPushCoordinator.swift in Sources */,
 				E47EA14A26F75BE000E793D4 /* CalendarViewController.swift in Sources */,
 				E4D92F16271D19F4002F054C /* CommonPopCoordinator.swift in Sources */,
