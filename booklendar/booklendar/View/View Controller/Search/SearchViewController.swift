@@ -10,14 +10,16 @@ import UIKit
 final class SearchViewController: UIViewController, ViewModelIncludable {
     
     // View
-    private var searchController: UISearchController = {
-        let searchController = UISearchController()
+    private var searchResultController = SearchResultController()
+    
+    private lazy var searchController: UISearchController = {
+        let searchController = UISearchController(searchResultsController: searchResultController)
         searchController.hidesNavigationBarDuringPresentation = false
         searchController.automaticallyShowsCancelButton = false
         return searchController
     }()
     
-    private var bookTableView: BookTableView = {
+    private lazy var bookTableView: BookTableView = {
         let tableView = BookTableView()
         tableView.backgroundColor = .white
         tableView.translatesAutoresizingMaskIntoConstraints = false
@@ -45,7 +47,8 @@ final class SearchViewController: UIViewController, ViewModelIncludable {
     private func configure() {
         view.backgroundColor = .white
         navigationItem.searchController = searchController
-        navigationItem.hidesSearchBarWhenScrolling = false 
+        navigationItem.hidesSearchBarWhenScrolling = false
+        searchController.searchResultsUpdater = self
         addBookTableView()
     }
     
@@ -71,5 +74,12 @@ final class SearchViewController: UIViewController, ViewModelIncludable {
     
     func viewNeedsChanges(with action: BookTableAction) {
         print("뒤로 가기")
+    }
+}
+
+extension SearchViewController: UISearchResultsUpdating {
+    func updateSearchResults(for searchController: UISearchController) {
+        guard let keyword = searchController.searchBar.text else { return }
+        print(keyword)
     }
 }
