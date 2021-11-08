@@ -42,7 +42,8 @@ final class DetailViewModel: DetailViewModelType {
     }
     
     func searchStarted() {
-        searchPushCoordinator.push(with: [], sceneMaker: searchSceneMaker.create)
+        let tempBooks = [Book(recentlyAdded: Date(), id: "", coverUrl: "", title: "낮밤", authors: ["이영지", "박재범"], translators: [], publisher: "영쥐", page: 40)]
+        searchPushCoordinator.push(with: tempBooks, sceneMaker: searchSceneMaker.create)
     }
     
     func newBookSelected(_ book: Book) {

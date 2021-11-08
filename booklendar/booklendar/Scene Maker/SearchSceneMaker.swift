@@ -16,7 +16,7 @@ final class SearchSceneMaker {
     
     func create(with info: [Book]) -> SearchViewController {
         var searchViewController = SearchViewController()
-        let viewModel = SearchViewModel()
+        let viewModel = SearchViewModel(recentBooks: info)
         searchViewController.set(viewModel)
         return searchViewController
     }

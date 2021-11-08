@@ -14,6 +14,10 @@ final class BookTableViewDataSource: NSObject {
         self.books = books
         super.init()
     }
+    
+    func new(books: [Book]) {
+        self.books = books
+    }
 }
 
 extension BookTableViewDataSource: UITableViewDataSource {
