@@ -45,10 +45,13 @@ final class SearchResultController: UIViewController {
     private func setBookTableViewHelpers() {
         bookTableViewDelegate = BookTableViewDelegate(actionHandler: viewNeedsChanges)
         resultTableView.delegate = bookTableViewDelegate
-        
-        let tempBooks = [Book(recentlyAdded: Date(), id: "", coverUrl: "", title: "밤낮", authors: ["이영지", "박재범"], translators: [], publisher: "영쥐", page: 40)]
-        bookTableViewDataSource = BookTableViewDataSource(books: tempBooks)
+        bookTableViewDataSource = BookTableViewDataSource()
         resultTableView.dataSource = bookTableViewDataSource
+    }
+    
+    func newSearchResult(_ books: [Book]) {
+        bookTableViewDataSource?.new(books: books)
+        resultTableView.reloadData()
     }
     
     func viewNeedsChanges(with action: BookTableAction) {

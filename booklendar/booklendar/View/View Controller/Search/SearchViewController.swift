@@ -66,20 +66,22 @@ final class SearchViewController: UIViewController, ViewModelIncludable {
     private func setBookTableViewHelpers() {
         bookTableViewDelegate = BookTableViewDelegate(actionHandler: viewNeedsChanges)
         bookTableView.delegate = bookTableViewDelegate
-        
-        let tempBooks = [Book(recentlyAdded: Date(), id: "", coverUrl: "", title: "낮밤", authors: ["이영지", "박재범"], translators: [], publisher: "영쥐", page: 40)]
-        bookTableViewDataSource = BookTableViewDataSource(books: tempBooks)
+        bookTableViewDataSource = BookTableViewDataSource(books: viewModel?.initialData() ?? [])
         bookTableView.dataSource = bookTableViewDataSource
     }
     
     func viewNeedsChanges(with action: BookTableAction) {
-        print("뒤로 가기")
+        switch action {
+        case .selectedAt(let indexPath):
+            viewModel?.resultSelected(at: indexPath)
+        }
     }
 }
 
 extension SearchViewController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
         guard let keyword = searchController.searchBar.text else { return }
-        print(keyword)
+        let newResult = viewModel?.startSearch(for: keyword) ?? []
+        searchResultController.newSearchResult(newResult)
     }
 }
