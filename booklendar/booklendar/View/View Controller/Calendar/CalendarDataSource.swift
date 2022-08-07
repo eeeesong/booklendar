@@ -40,7 +40,8 @@ extension CalendarDataSource: UICollectionViewDataSource {
             let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: headerId, for: indexPath) as? CalendarHeaderCollectionViewCell ?? CalendarHeaderCollectionViewCell()
             let midDay = sections[indexPath.section][15].day
             let monthInfo = DateFormatter.dateToString(format: DateFormat.monthYear, date: midDay.date)
-            let headerInfo = HeaderInfo.month(monthInfo)
+            let monthInfoInEnglish = DateFormatter.transformMonthToEnglish(monthInfo)
+            let headerInfo = HeaderInfo.month(monthInfoInEnglish)
             header.configure(with: headerInfo)
             return header
         default:

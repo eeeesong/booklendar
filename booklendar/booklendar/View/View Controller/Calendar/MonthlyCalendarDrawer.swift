@@ -21,7 +21,7 @@ final class MonthlyCalendarDrawer: NSObject {
     private var outlineBoxes: [CALayer]
     private lazy var cellWidth = (calendarWidth - Constants.inset) / Constants.cell
     private lazy var cellHeight = cellWidth * 1.7
-    private lazy var headerHeight = cellHeight * 1.2
+    private lazy var headerHeight = cellHeight * 1.05
     private var actionHandler: CalendarHandler
     
     enum Constants {
@@ -62,7 +62,7 @@ final class MonthlyCalendarDrawer: NSObject {
     
     private func outlineBox() -> CALayer {
         let layer = CALayer()
-        layer.borderColor = UIColor.darkGray.cgColor
+        layer.borderColor = UIColor.lightGray.cgColor
         layer.borderWidth = 1
         return layer
     }

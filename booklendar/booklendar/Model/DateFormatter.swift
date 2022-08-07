@@ -20,4 +20,13 @@ extension DateFormatter {
         formatter.dateFormat = format
         return formatter.string(from: date)
     }
+    
+    // 개선 필요한 거지같은 메소드
+    static func transformMonthToEnglish(_ original: String) -> String {
+        let monthsInEnglish = ["January", "Febuary", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
+        let strings = original.split(separator: " ").map { String($0) }
+        let month = strings[0].dropLast()
+        let index = Int(month)! - 1
+        return monthsInEnglish[index] + " " + strings[1]
+    }
 }

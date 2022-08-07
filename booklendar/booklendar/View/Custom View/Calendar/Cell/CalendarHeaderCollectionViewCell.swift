@@ -31,7 +31,7 @@ final class CalendarHeaderCollectionViewCell: UICollectionViewCell {
         NSLayoutConstraint.activate([
             titleLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
             titleLabel.centerYAnchor.constraint(equalTo: centerYAnchor),
-            titleLabel.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.95)
+            titleLabel.widthAnchor.constraint(equalTo: widthAnchor)
         ])
     }
     
