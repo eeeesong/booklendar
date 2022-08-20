@@ -60,11 +60,13 @@ final class DetailView: UIView {
     private(set) lazy var commentTextView: UITextView = {
         let textView = UITextView()
         textView.font = UIFont.body()
+        textView.typingAttributes = [.font: UIFont.bookTitle(), .baselineOffset: 5]
         textView.textAlignment = .left
         textView.isEditable = false
         textView.isSelectable = true
-        textView.textContainerInset = .init(top: 10, left: 12, bottom: 10, right: 12)
+        textView.textContainerInset = .init(top: 20, left: 12, bottom: 20, right: 12)
         textView.layer.borderWidth = 1
+        textView.layer.borderColor = Colors.line.cgColor
         textView.translatesAutoresizingMaskIntoConstraints = false
         return textView
     }()
