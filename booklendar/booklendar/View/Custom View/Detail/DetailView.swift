@@ -178,11 +178,16 @@ final class DetailView: UIView {
         guard let book = book else {
             titleLabel.text = "연필 버튼을 눌러서 책을 등록해주세요."
             authorLabel.text = ""
+            imageFrame.configure(with: UIImage(), style: .random())
             return
         }
         
         titleLabel.text = book.title
         authorLabel.text = book.authors.joined(separator: ", ")
+        
+        guard let imageData = try? Data(contentsOf: URL(string: book.coverUrl)!) else { return }
+        let newImage = UIImage(data: imageData) ?? UIImage()
+        imageFrame.configure(with: newImage, style: .random())
     }
     
     func searchMode(isOn: Bool) {

@@ -10,7 +10,7 @@ import Foundation
 protocol SearchViewModelType {
     func initialData() -> [Book]
     func startSearch(for keyword: String) -> [Book]
-    func resultSelected(at indexPath: IndexPath)
+    func resultSelected(at indexPath: IndexPath) -> Book
 }
 
 
@@ -43,9 +43,9 @@ final class SearchViewModel: SearchViewModelType {
         // 네트워크 레이어를 통해 검색 실행
     }
     
-    func resultSelected(at indexPath: IndexPath) {
+    func resultSelected(at indexPath: IndexPath) -> Book {
         let index = indexPath.row
         let targetBook = isSearchOn ? searchedBooks[index] : recentBooks[index]
-        print(targetBook.title) // 이전 화면에 정보를 넘김
+        return targetBook
     }
 }

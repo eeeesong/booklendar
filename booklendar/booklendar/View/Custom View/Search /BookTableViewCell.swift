@@ -11,7 +11,7 @@ final class BookTableViewCell: UITableViewCell {
 
     private lazy var coverImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.backgroundColor = .lightGray
+        imageView.contentMode = .scaleToFill
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
@@ -79,5 +79,9 @@ final class BookTableViewCell: UITableViewCell {
     func configure(with book: Book) {
         titleLabel.text = book.title
         infoLabel.text = book.authors.joined(separator: ", ") + " / " + book.publisher
+        
+        guard let imageData = try? Data(contentsOf: URL(string: book.coverUrl)!) else { return }
+        let newImage = UIImage(data: imageData) ?? UIImage()
+        coverImageView.image = newImage
     }
 }

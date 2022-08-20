@@ -8,8 +8,9 @@
 import UIKit
 
 final class SearchPushCoordinator: PushCoordinator {
-    
+
     typealias Info = [Book]
+    typealias Result = Book
     typealias Target = SearchViewController
     private var navigationController: UINavigationController
     
@@ -17,8 +18,10 @@ final class SearchPushCoordinator: PushCoordinator {
         self.navigationController = navigationController
     }
     
-    func push(with info: [Book], sceneMaker: SceneMaker) {
+    func push(with info: Info, sceneMaker: (Info) -> SearchViewController, completionHandler: ((Result?) -> ())?) {
         let searchViewController = sceneMaker(info)
+        searchViewController.completionHandler = completionHandler
         navigationController.pushViewController(searchViewController, animated: true)
     }
+    
 }

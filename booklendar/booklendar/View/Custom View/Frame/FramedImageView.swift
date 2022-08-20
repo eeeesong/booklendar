@@ -34,12 +34,14 @@ final class FramedImageView: UIView {
     
     private lazy var frameImageView: UIImageView = {
         let imageView = UIImageView()
+        imageView.contentMode = .scaleToFill
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
     
     private lazy var imageView: UIImageView = {
         let imageView = UIImageView()
+        imageView.contentMode = .scaleToFill
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()

@@ -8,9 +8,10 @@
 import Foundation
 
 protocol DetailViewModelType {
+    var updator: ((Routine) -> ()) { get set }
     func initialData() -> Routine
     func searchStarted()
-    func newBookSelected(_ book: Book)
+    func newBookSelected(_ book: Book?)
     func newCommentAdded(_ comment: String)
     func editStateChanged(to state: DetailEditState)
     func editingFinished()
@@ -29,12 +30,14 @@ final class DetailViewModel: DetailViewModelType {
     private var searchPushCoordinator: SearchPushCoordinator
     private var searchSceneMaker: SearchSceneMaker
     private var viewNeedsUpdate = false
+    var updator: ((Routine) -> ())
     
-    init(currentDetails: Routine, popCoordinator: DetailPopCoordinator, searchPushCoordinator: SearchPushCoordinator, searchSceneMaker: SearchSceneMaker) {
+    init(currentDetails: Routine, popCoordinator: DetailPopCoordinator, searchPushCoordinator: SearchPushCoordinator, searchSceneMaker: SearchSceneMaker, updator: @escaping ((Routine) -> ())) {
         self.currentDetails = currentDetails
         self.popCoordinator = popCoordinator
         self.searchPushCoordinator = searchPushCoordinator
         self.searchSceneMaker = searchSceneMaker
+        self.updator = updator
     }
     
     func initialData() -> Routine {
@@ -42,13 +45,25 @@ final class DetailViewModel: DetailViewModelType {
     }
     
     func searchStarted() {
-        let tempBooks = [Book(recentlyAdded: Date(), id: "", coverUrl: "", title: "낮밤", authors: ["이영지", "박재범"], translators: [], publisher: "영쥐", page: 40)]
-        searchPushCoordinator.push(with: tempBooks, sceneMaker: searchSceneMaker.create)
+        // 여기서 최근 검색 결과를 보여준다...ㅎ
+        let tempBooks =
+        [
+            Book(recentlyAdded: Date(), id: "", coverUrl: "https://pbs.twimg.com/profile_images/1445377282189578243/X_1X9b5W_400x400.jpg", title: "낮밤", authors: ["이영지", "박재범"], translators: [], publisher: "영쥐", page: 40),
+            Book(recentlyAdded: Date(), id: "", coverUrl: "https://images.genius.com/5ce3a54c776805519c3bf039010528df.1000x1000x1.jpg", title: "Attention", authors: ["뉴진스"], translators: [], publisher: "민희진", page: 40),
+            Book(recentlyAdded: Date(), id: "", coverUrl: "https://blog.kakaocdn.net/dn/DzIKp/btrH1a0ynbr/0KFwD8kKJPrCz0e5ZkLH21/img.jpg", title: "Hype boy", authors: ["뉴진스"], translators: [], publisher: "민희진", page: 40)
+        ]
+        searchPushCoordinator.push(with: tempBooks, sceneMaker: searchSceneMaker.create, completionHandler: newBookSelected(_:))
     }
     
-    func newBookSelected(_ book: Book) {
-        let newRecord = Record(order: 0, book: book, comment: "")
-        currentDetails.records.append(newRecord)
+    func newBookSelected(_ book: Book?) {
+        guard let book = book else { return }
+        var newRecord = Record(order: 0, book: book, comment: "")
+        if !currentDetails.records.isEmpty {
+            let currentRecord = currentDetails.records[0]
+            newRecord.comment = currentRecord.comment
+        }
+        currentDetails.records.insert(newRecord, at: 0)
+        updator(currentDetails)
         viewNeedsUpdate = true
     }
     

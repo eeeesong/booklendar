@@ -49,7 +49,7 @@ final class DetailViewController: UIViewController, ViewModelIncludable {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setInitialData()
+        updateDetails(with: viewModel?.initialData())
     }
     
     private func configure() {
@@ -76,8 +76,8 @@ final class DetailViewController: UIViewController, ViewModelIncludable {
         navigationItem.rightBarButtonItem = editButton
     }
     
-    private func setInitialData() {
-        guard let details = viewModel?.initialData() else { return }
+    private func updateDetails(with details: Routine?) {
+        guard let details = details else { return }
         let dateInString = details.date.dateToString(format: DateFormat.fullDate)
         let detail = details.records.isEmpty ? nil : details.records[0].book
         detailView.configure(with: dateInString, detail)
@@ -108,5 +108,9 @@ final class DetailViewController: UIViewController, ViewModelIncludable {
         case .searchButtonTouched:
             viewModel.searchStarted()
         }
+    }
+    
+    func redraw(with routine: Routine) {
+        updateDetails(with: routine)
     }
 }

@@ -26,7 +26,8 @@ final class DetailSceneMaker {
         let viewModel = DetailViewModel(currentDetails: info,
                                         popCoordinator: popCoordinator,
                                         searchPushCoordinator: searchPushCordinator,
-                                        searchSceneMaker: searchSceneMaker)
+                                        searchSceneMaker: searchSceneMaker,
+                                        updator: detailViewController.redraw(with:))
         detailViewController.set(viewModel)
         return detailViewController
     }
