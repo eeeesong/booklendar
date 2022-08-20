@@ -7,7 +7,10 @@
 
 import UIKit
 
-enum CalendarColor {
+enum Colors {
     static let background = UIColor.white
+    static let calendarFill = UIColor.white
+    static let line = UIColor.black
+    static let menu = UIColor.black
 }
 

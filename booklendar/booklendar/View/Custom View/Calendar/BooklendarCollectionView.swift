@@ -10,7 +10,7 @@ import UIKit
 final class BooklendarCollectionView<ContentCell: UICollectionViewCell,
                                      HeaderCell: UICollectionViewCell>: UICollectionView {
 
-    private lazy var calendarColor = CalendarColor.background
+    private lazy var calendarColor = Colors.calendarFill
     
     override init(frame: CGRect, collectionViewLayout layout: UICollectionViewLayout) {
         super.init(frame: frame, collectionViewLayout: layout)
