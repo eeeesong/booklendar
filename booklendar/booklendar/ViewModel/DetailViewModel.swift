@@ -53,6 +53,7 @@ final class DetailViewModel: DetailViewModelType {
     }
     
     func newCommentAdded(_ comment: String) {
+        guard !currentDetails.records.isEmpty else { return }
         currentDetails.records[0].comment = comment
         viewNeedsUpdate = true
     }

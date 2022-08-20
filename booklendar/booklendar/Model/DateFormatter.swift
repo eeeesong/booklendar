@@ -11,6 +11,15 @@ enum DateFormat {
     static let dateKey = "YYYYMMDD"
     static let onlyDay = "d"
     static let monthYear = "M월 YYYY"
+    static let fullDate = "YYYY. M. d"
+}
+
+extension Date {
+    func dateToString(format: String) -> String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = format
+        return formatter.string(from: self)
+    }
 }
 
 extension DateFormatter {

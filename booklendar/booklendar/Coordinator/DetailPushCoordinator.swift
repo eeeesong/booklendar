@@ -9,7 +9,7 @@ import UIKit
 
 final class DetailPushCoordinator: PushCoordinator {
     
-    typealias Info = Routine?
+    typealias Info = Routine
     typealias Target = DetailViewController
     private var navigationController: UINavigationController
     
@@ -17,7 +17,7 @@ final class DetailPushCoordinator: PushCoordinator {
         self.navigationController = navigationController
     }
     
-    func push(with info: Routine?, sceneMaker: SceneMaker) {
+    func push(with info: Routine, sceneMaker: SceneMaker) {
         let detailViewController = sceneMaker(info)
         navigationController.pushViewController(detailViewController, animated: true)
     }

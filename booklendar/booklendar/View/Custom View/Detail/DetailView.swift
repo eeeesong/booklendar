@@ -25,17 +25,16 @@ final class DetailView: UIView {
     
     private lazy var imageFrame: FramedImageView = {
         let imageView = FramedImageView()
-        imageView.backgroundColor = .cyan
+        imageView.configure(with: UIImage(), style: FramedImageView.Style.random())
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
     
     private lazy var searchButton: UIButton = {
         let searchButton = UIButton()
-        searchButton.backgroundColor = UIColor(white: 0.5, alpha: 0.5)
         let searchImage = UIImage(systemName: "magnifyingglass")
         searchButton.setImage(searchImage, for: .normal)
-        searchButton.tintColor = .white
+        searchButton.tintColor = Colors.menu
         searchButton.translatesAutoresizingMaskIntoConstraints = false
         searchButton.isHidden = true
         searchButton.addTarget(self, action: #selector(searchButtonTouched), for: .touchUpInside)
@@ -106,8 +105,8 @@ final class DetailView: UIView {
         
         NSLayoutConstraint.activate([
             imageFrame.centerXAnchor.constraint(equalTo: centerXAnchor),
-            imageFrame.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.35),
-            imageFrame.heightAnchor.constraint(equalTo: imageFrame.widthAnchor, multiplier: 1.6),
+            imageFrame.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.5),
+            imageFrame.heightAnchor.constraint(equalTo: imageFrame.widthAnchor, multiplier: 1.1),
             imageFrame.topAnchor.constraint(equalTo: dateLabel.bottomAnchor, constant: 20)
         ])
     }
@@ -146,11 +145,22 @@ final class DetailView: UIView {
     }
     
     private func addCommentTextView() {
+        let dividerLineView = UIView()
+        dividerLineView.backgroundColor = Colors.line
+        dividerLineView.translatesAutoresizingMaskIntoConstraints = false
+        addSubview(dividerLineView)
+        NSLayoutConstraint.activate([
+            dividerLineView.centerXAnchor.constraint(equalTo: centerXAnchor),
+            dividerLineView.topAnchor.constraint(equalTo: authorLabel.bottomAnchor, constant: 20),
+            dividerLineView.widthAnchor.constraint(equalTo: safeAreaLayoutGuide.widthAnchor, multiplier: 0.2),
+            dividerLineView.heightAnchor.constraint(equalToConstant: 1)
+        ])
+        
         addSubview(commentTextView)
         
         NSLayoutConstraint.activate([
             commentTextView.centerXAnchor.constraint(equalTo: centerXAnchor),
-            commentTextView.topAnchor.constraint(equalTo: authorLabel.bottomAnchor, constant: 20),
+            commentTextView.topAnchor.constraint(equalTo: dividerLineView.bottomAnchor, constant: 20),
             commentTextView.widthAnchor.constraint(equalTo: safeAreaLayoutGuide.widthAnchor, multiplier: 0.9),
             commentTextView.bottomAnchor.constraint(greaterThanOrEqualTo: safeAreaLayoutGuide.bottomAnchor, constant: -15)
         ])
@@ -162,8 +172,15 @@ final class DetailView: UIView {
     
     func configure(with dateString: String,_ book: Book?) {
         dateLabel.text = dateString
-        titleLabel.text = book?.title
-        authorLabel.text = book?.authors.joined(separator: ", ")
+        
+        guard let book = book else {
+            titleLabel.text = "연필 버튼을 눌러서 책을 등록해주세요."
+            authorLabel.text = ""
+            return
+        }
+        
+        titleLabel.text = book.title
+        authorLabel.text = book.authors.joined(separator: ", ")
     }
     
     func searchMode(isOn: Bool) {

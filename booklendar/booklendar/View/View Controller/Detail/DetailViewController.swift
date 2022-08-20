@@ -17,6 +17,7 @@ final class DetailViewController: UIViewController, ViewModelIncludable {
                                          style: .plain,
                                          target: self,
                                          action: #selector(backButtonTouched))
+        backButton.tintColor = Colors.menu
         return backButton
     }()
     
@@ -25,6 +26,7 @@ final class DetailViewController: UIViewController, ViewModelIncludable {
                                          style: .plain,
                                          target: self,
                                          action: #selector(editButtonTouched))
+        editButton.tintColor = Colors.menu
         return editButton
     }()
     
@@ -33,6 +35,7 @@ final class DetailViewController: UIViewController, ViewModelIncludable {
                                          style: .plain,
                                          target: self,
                                          action: #selector(doneButtonTouched))
+        doneButton.tintColor = Colors.menu
         return doneButton
     }()
 
@@ -75,7 +78,9 @@ final class DetailViewController: UIViewController, ViewModelIncludable {
     
     private func setInitialData() {
         guard let details = viewModel?.initialData() else { return }
-        detailView.configure(with: "2021. 10. 24", details.records[0].book)
+        let dateInString = details.date.dateToString(format: DateFormat.fullDate)
+        let detail = details.records.isEmpty ? nil : details.records[0].book
+        detailView.configure(with: dateInString, detail)
     }
     
     @objc func backButtonTouched(_ sender: UIBarButtonItem) {

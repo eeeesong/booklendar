@@ -164,7 +164,8 @@ final class CalendarViewController: UIViewController, ViewModelIncludable {
             let newMonth = viewModel.newCalendarNeeded()
             newMonthLoaded(newMonth)
         case .selectedAt(let indexPath):
-            viewModel.calendarCellSelected(at: indexPath)
+            guard let daySelected = calendarDataSource?.sections[indexPath.section][indexPath.row] else { return }
+            viewModel.calendarCellSelected(at: indexPath, dayRecord: daySelected)
         }
     }
 }

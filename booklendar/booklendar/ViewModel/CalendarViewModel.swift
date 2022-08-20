@@ -10,7 +10,7 @@ import Foundation
 protocol CalendarViewModelType {
     func initialData(of initialCount: Int) -> [[DayRecord]]
     func newCalendarNeeded() -> [DayRecord]
-    func calendarCellSelected(at indexPath: IndexPath)
+    func calendarCellSelected(at indexPath: IndexPath, dayRecord: DayRecord)
 }
 
 final class CalendarViewModel: CalendarViewModelType {
@@ -39,14 +39,15 @@ final class CalendarViewModel: CalendarViewModelType {
         calendarManager.loadLastData()
     }
     
-    func calendarCellSelected(at indexPath: IndexPath) {
+    func calendarCellSelected(at indexPath: IndexPath, dayRecord: DayRecord) {
         let month = indexPath.section
         let day = indexPath.row
-        let targetInfo = calendarManager.allRecords(at: month, day)
+        let targetInfo = calendarManager.allRecords(at: month, day) ?? Routine(date: dayRecord.day.date ?? Date(),
+                                                                               records: [])
         pushCoordinator.push(with: targetInfo, sceneMaker: sceneMaker(info:))
     }
     
-    private func sceneMaker(info: Routine?) -> DetailViewController {
+    private func sceneMaker(info: Routine) -> DetailViewController {
         return sceneMaker.create(with: info)
     }
 }
