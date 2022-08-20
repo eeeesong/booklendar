@@ -2,18 +2,7 @@
   "images" : [
     {
       "filename" : "frame_0000_다이아몬드-프레임.png",
-      "idiom" : "universal",
-      "scale" : "1x"
-    },
-    {
-      "filename" : "frame_0000_다이아몬드-프레임-1.png",
-      "idiom" : "universal",
-      "scale" : "2x"
-    },
-    {
-      "filename" : "frame_0000_다이아몬드-프레임-2.png",
-      "idiom" : "universal",
-      "scale" : "3x"
+      "idiom" : "universal"
     }
   ],
   "info" : {
