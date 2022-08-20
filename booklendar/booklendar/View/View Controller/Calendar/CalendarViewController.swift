@@ -172,6 +172,13 @@ final class CalendarViewController: UIViewController, ViewModelIncludable {
 
 extension CalendarViewController: NewStateAcceptable {
     func accept<State>(newState: State) {
-        print(newState)
+        guard let routine = newState as? Routine else { return }
+        
+        viewModel?.new(routine: routine)
+        calendarDataSource?.update(routine)
+        
+        DispatchQueue.main.async {
+            self.monthlyCalendarView.reloadData()
+        }
     }
 }

@@ -17,7 +17,7 @@ final class DetailPushCoordinator: PushCoordinator {
         self.navigationController = navigationController
     }
     
-    func push(with info: Routine, sceneMaker: SceneMaker, completionHandler: ((Info?) -> ())? = nil) {
+    func push(with info: Info, sceneMaker: SceneMaker, completionHandler: ((Info?) -> ())? = nil) {
         let detailViewController = sceneMaker(info)
         navigationController.pushViewController(detailViewController, animated: true)
     }

@@ -8,8 +8,9 @@
 import Foundation
 
 protocol CalendarManagable {
-    func allRecords(at month: Int, _ day: Int) -> Routine?
+    func routine(for key: String) -> Routine?
     func loadLastData() -> [DayRecord]
+    func update(from routine: Routine)
 }
 
 final class CalendarManager: CalendarManagable {
@@ -21,15 +22,8 @@ final class CalendarManager: CalendarManagable {
         self.routines = routines
     }
     
-    func allRecords(at month: Int, _ day: Int) -> Routine? {
-        let targetDay = months[month][day]
-        
-        guard let date = targetDay.date else {
-            return nil
-        }
-        
-        let dateKey = DateFormatter.dateToString(format: DateFormat.dateKey, date: date)
-        return routines[dateKey]
+    func routine(for key: String) -> Routine? {
+        return routines[key]
     }
     
     func loadLastData() -> [DayRecord] {
@@ -44,6 +38,11 @@ final class CalendarManager: CalendarManagable {
         let dayRecords = months.last!
             .map { DayRecord(day: $0, record: mainBook(for: $0.date)) }
         return dayRecords
+    }
+    
+    func update(from routine: Routine) {
+        let key = routine.date.dateToString(format: DateFormat.dateKey)
+        routines[key] = routine
     }
     
     private func pastMonthDate(from currentDate: Date) -> Date {

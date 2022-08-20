@@ -9,6 +9,7 @@ import Foundation
 
 struct Record {
     var order: Int
+    var frameStyle: FramedImageView.Style
     var book: Book
     var comment: String
 }

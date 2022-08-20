@@ -172,7 +172,7 @@ final class DetailView: UIView {
         self.actionHandler = actionHandler
     }
     
-    func configure(with dateString: String,_ book: Book?) {
+    func configure(with dateString: String,_ book: Book?, frameStyle: FramedImageView.Style?) {
         dateLabel.text = dateString
         
         guard let book = book else {
@@ -187,7 +187,7 @@ final class DetailView: UIView {
         
         guard let imageData = try? Data(contentsOf: URL(string: book.coverUrl)!) else { return }
         let newImage = UIImage(data: imageData) ?? UIImage()
-        imageFrame.configure(with: newImage, style: .random())
+        imageFrame.configure(with: newImage, style: frameStyle ?? .random())
     }
     
     func searchMode(isOn: Bool) {

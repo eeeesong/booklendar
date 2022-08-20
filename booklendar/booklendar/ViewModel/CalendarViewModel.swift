@@ -11,6 +11,7 @@ protocol CalendarViewModelType {
     func initialData(of initialCount: Int) -> [[DayRecord]]
     func newCalendarNeeded() -> [DayRecord]
     func calendarCellSelected(at indexPath: IndexPath, dayRecord: DayRecord)
+    func new(routine: Routine)
 }
 
 final class CalendarViewModel: CalendarViewModelType {
@@ -40,14 +41,17 @@ final class CalendarViewModel: CalendarViewModelType {
     }
     
     func calendarCellSelected(at indexPath: IndexPath, dayRecord: DayRecord) {
-        let month = indexPath.section
-        let day = indexPath.row
-        let targetInfo = calendarManager.allRecords(at: month, day) ?? Routine(date: dayRecord.day.date ?? Date(),
-                                                                               records: [])
+        guard let date = dayRecord.day.date else { return }
+        let dateKey = date.dateToString(format: DateFormat.dateKey)
+        let targetInfo = calendarManager.routine(for: dateKey) ?? Routine(date: date)
         pushCoordinator.push(with: targetInfo, sceneMaker: sceneMaker(info:))
     }
     
     private func sceneMaker(info: Routine) -> DetailViewController {
         return sceneMaker.create(with: info)
+    }
+    
+    func new(routine: Routine) {
+        calendarManager.update(from: routine)
     }
 }

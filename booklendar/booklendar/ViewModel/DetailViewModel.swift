@@ -24,12 +24,12 @@ enum DetailEditState {
 
 final class DetailViewModel: DetailViewModelType {
     
-    typealias DetailPopCoordinator = CommonPopCoordinator<Bool>
+    typealias DetailPopCoordinator = CommonPopCoordinator<Routine?>
     private var currentDetails: Routine
     private var popCoordinator: DetailPopCoordinator
     private var searchPushCoordinator: SearchPushCoordinator
     private var searchSceneMaker: SearchSceneMaker
-    private var viewNeedsUpdate = false
+    private var viewNeedsUpdate: Routine?
     var updator: ((Routine) -> ())
     
     init(currentDetails: Routine, popCoordinator: DetailPopCoordinator, searchPushCoordinator: SearchPushCoordinator, searchSceneMaker: SearchSceneMaker, updator: @escaping ((Routine) -> ())) {
@@ -57,20 +57,21 @@ final class DetailViewModel: DetailViewModelType {
     
     func newBookSelected(_ book: Book?) {
         guard let book = book else { return }
-        var newRecord = Record(order: 0, book: book, comment: "")
+        var newRecord = Record(order: 0, frameStyle: .random(), book: book, comment: "")
         if !currentDetails.records.isEmpty {
             let currentRecord = currentDetails.records[0]
             newRecord.comment = currentRecord.comment
+            newRecord.frameStyle = currentRecord.frameStyle
         }
         currentDetails.records.insert(newRecord, at: 0)
         updator(currentDetails)
-        viewNeedsUpdate = true
+        viewNeedsUpdate = currentDetails
     }
     
     func newCommentAdded(_ comment: String) {
         guard !currentDetails.records.isEmpty else { return }
         currentDetails.records[0].comment = comment
-        viewNeedsUpdate = true
+        viewNeedsUpdate = currentDetails
     }
     
     func editStateChanged(to state: DetailEditState) {

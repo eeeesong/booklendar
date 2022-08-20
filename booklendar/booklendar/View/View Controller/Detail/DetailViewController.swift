@@ -79,8 +79,8 @@ final class DetailViewController: UIViewController, ViewModelIncludable {
     private func updateDetails(with details: Routine?) {
         guard let details = details else { return }
         let dateInString = details.date.dateToString(format: DateFormat.fullDate)
-        let detail = details.records.isEmpty ? nil : details.records[0].book
-        detailView.configure(with: dateInString, detail)
+        let detail = details.records.isEmpty ? nil : details.records[0]
+        detailView.configure(with: dateInString, detail?.book, frameStyle: detail?.frameStyle)
     }
     
     @objc func backButtonTouched(_ sender: UIBarButtonItem) {

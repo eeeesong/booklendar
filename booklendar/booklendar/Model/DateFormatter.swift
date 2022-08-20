@@ -8,7 +8,7 @@
 import Foundation
 
 enum DateFormat {
-    static let dateKey = "YYYYMMDD"
+    static let dateKey = "YYYYMMdd"
     static let onlyDay = "d"
     static let monthYear = "M월 YYYY"
     static let fullDate = "YYYY. M. d"
