@@ -62,7 +62,7 @@ final class MonthlyCalendarDrawer: NSObject {
     
     private func outlineBox() -> CALayer {
         let layer = CALayer()
-        layer.borderColor = UIColor.lightGray.cgColor
+        layer.borderColor = Colors.line.cgColor
         layer.borderWidth = 1
         return layer
     }

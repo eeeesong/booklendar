@@ -17,7 +17,7 @@ final class CalendarViewController: UIViewController, ViewModelIncludable {
                                      style: .plain,
                                      target: nil,
                                      action: nil)
-        button.tintColor = .darkGray
+        button.tintColor = Colors.menu
         return button
     }()
     
@@ -26,7 +26,7 @@ final class CalendarViewController: UIViewController, ViewModelIncludable {
                                      style: .plain,
                                      target: nil,
                                      action: nil)
-        button.tintColor = .darkGray
+        button.tintColor = Colors.menu
         return button
     }()
     
@@ -61,17 +61,16 @@ final class CalendarViewController: UIViewController, ViewModelIncludable {
     }
     
     private func configure() {
-        view.backgroundColor = .white
+        view.backgroundColor = Colors.background
         navigationItem.leftBarButtonItem = menuButton
         navigationItem.rightBarButtonItem = writeButton
-        navigationController?.navigationBar.backgroundColor = UIColor(named: "lime")
         addViews()
     }
     
     private func addViews() {
         let lineView = UIView()
         lineView.translatesAutoresizingMaskIntoConstraints = false
-        lineView.backgroundColor = .lightGray
+        lineView.backgroundColor = Colors.line
         
         view.addSubview(lineView)
         NSLayoutConstraint.activate([
@@ -112,7 +111,7 @@ final class CalendarViewController: UIViewController, ViewModelIncludable {
         
         let lineView2 = UIView()
         lineView2.translatesAutoresizingMaskIntoConstraints = false
-        lineView2.backgroundColor = .lightGray
+        lineView2.backgroundColor = Colors.line
         
         view.addSubview(lineView2)
         NSLayoutConstraint.activate([

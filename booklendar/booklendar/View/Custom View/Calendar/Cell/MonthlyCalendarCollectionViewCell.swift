@@ -61,8 +61,15 @@ final class MonthlyCalendarCollectionViewCell: UICollectionViewCell {
     }
     
     func configure(with day: Day, _ imageUrl: String) {
-        dayLabel.text = DateFormatter.dateToString(format: DateFormat.onlyDay, date: day.date)
-        coverImageView.backgroundColor = day.date == nil ? nil : .green
+        let onlyDay = DateFormatter.dateToString(format: DateFormat.onlyDay, date: day.date)
+        dayLabel.text = onlyDay
+        if day.date != nil {
+            let imageName = "book" + String((Int(onlyDay) ?? 0) % 4 + 1)
+            let image = UIImage(named: imageName) ?? UIImage()
+            coverImageView.configure(with: image, style: FramedImageView.Style.random())
+        } else {
+            coverImageView.reset()
+        }
         isUserInteractionEnabled = !day.isFuture
     }
 }
