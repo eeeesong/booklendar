@@ -11,6 +11,7 @@ typealias DetailHandler = (DetailAction) -> Void
 
 enum DetailAction {
     case searchButtonTouched
+    case styleSelected(FramedImageView.Style)
 }
 
 final class DetailView: UIView {
@@ -70,6 +71,34 @@ final class DetailView: UIView {
         textView.translatesAutoresizingMaskIntoConstraints = false
         return textView
     }()
+    
+    private lazy var frameSelectView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.layer.borderWidth = 1
+        stackView.layer.borderColor = Colors.line.cgColor
+        stackView.alignment = .center
+        stackView.spacing = 5
+        stackView.layoutMargins = UIEdgeInsets(top: 0, left: 15, bottom: 0, right: 15)
+        stackView.isLayoutMarginsRelativeArrangement = true
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        
+        for style in FramedImageView.Style.allCases {
+            let button = UIButton()
+            button.setImage(style.image, for: .normal)
+            button.imageView?.contentMode = .scaleToFill
+            button.addTarget(self, action: #selector(styleButtonTouched), for: .touchUpInside)
+            button.translatesAutoresizingMaskIntoConstraints = false
+            NSLayoutConstraint.activate([
+                button.widthAnchor.constraint(equalToConstant: 45),
+                button.heightAnchor.constraint(equalToConstant: 50),
+            ])
+            stackView.addArrangedSubview(button)
+            styles[button] = style
+        }
+        return stackView
+    }()
+    
+    private var styles = [UIButton: FramedImageView.Style]()
     
     private var actionHandler: DetailHandler?
     
@@ -163,8 +192,17 @@ final class DetailView: UIView {
         NSLayoutConstraint.activate([
             commentTextView.centerXAnchor.constraint(equalTo: centerXAnchor),
             commentTextView.topAnchor.constraint(equalTo: dividerLineView.bottomAnchor, constant: 20),
-            commentTextView.widthAnchor.constraint(equalTo: safeAreaLayoutGuide.widthAnchor, multiplier: 0.9),
-            commentTextView.bottomAnchor.constraint(greaterThanOrEqualTo: safeAreaLayoutGuide.bottomAnchor, constant: -15)
+            commentTextView.widthAnchor.constraint(equalTo: safeAreaLayoutGuide.widthAnchor, multiplier: 0.7)
+        ])
+        
+        addSubview(frameSelectView)
+        
+        NSLayoutConstraint.activate([
+            frameSelectView.centerXAnchor.constraint(equalTo: centerXAnchor),
+            frameSelectView.topAnchor.constraint(equalTo: commentTextView.bottomAnchor, constant: 20),
+            frameSelectView.widthAnchor.constraint(equalToConstant: CGFloat(50 * FramedImageView.Style.allCases.count) + 25),
+            frameSelectView.heightAnchor.constraint(equalToConstant: 60),
+            frameSelectView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -15)
         ])
     }
     
@@ -172,7 +210,7 @@ final class DetailView: UIView {
         self.actionHandler = actionHandler
     }
     
-    func configure(with dateString: String,_ book: Book?, frameStyle: FramedImageView.Style?) {
+    func configure(with dateString: String,_ book: Book?, comment: String?, frameStyle: FramedImageView.Style?) {
         dateLabel.text = dateString
         
         guard let book = book else {
@@ -184,6 +222,7 @@ final class DetailView: UIView {
         
         titleLabel.text = book.title
         authorLabel.text = book.authors.joined(separator: ", ")
+        commentTextView.text = comment
         
         guard let imageData = try? Data(contentsOf: URL(string: book.coverUrl)!) else { return }
         let newImage = UIImage(data: imageData) ?? UIImage()
@@ -195,7 +234,17 @@ final class DetailView: UIView {
         searchButton.isHidden = !isOn
     }
     
+    private func style(for button: UIButton) -> FramedImageView.Style {
+        return styles[button] ?? .random()
+    }
+    
     @objc private func searchButtonTouched(_ sender: UIButton) {
         actionHandler?(.searchButtonTouched)
+    }
+    
+    @objc private func styleButtonTouched(_ sender: UIButton) {
+        let style = style(for: sender)
+        imageFrame.changeStyle(to: style)
+        actionHandler?(.styleSelected(style))
     }
 }

@@ -79,6 +79,10 @@ final class FramedImageView: UIView {
         frameImageView.image = style.image
     }
     
+    func changeStyle(to style: Style) {
+        frameImageView.image = style.image
+    }
+    
     func reset() {
         imageView.image = nil
         frameImageView.image = nil

@@ -13,6 +13,7 @@ protocol DetailViewModelType {
     func searchStarted()
     func newBookSelected(_ book: Book?)
     func newCommentAdded(_ comment: String)
+    func newStyleSelected(_ style: FramedImageView.Style)
     func editStateChanged(to state: DetailEditState)
     func editingFinished()
 }
@@ -71,6 +72,12 @@ final class DetailViewModel: DetailViewModelType {
     func newCommentAdded(_ comment: String) {
         guard !currentDetails.records.isEmpty else { return }
         currentDetails.records[0].comment = comment
+        viewNeedsUpdate = currentDetails
+    }
+    
+    func newStyleSelected(_ style: FramedImageView.Style) {
+        guard !currentDetails.records.isEmpty else { return }
+        currentDetails.records[0].frameStyle = style
         viewNeedsUpdate = currentDetails
     }
     

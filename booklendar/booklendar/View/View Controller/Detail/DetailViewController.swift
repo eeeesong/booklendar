@@ -80,7 +80,7 @@ final class DetailViewController: UIViewController, ViewModelIncludable {
         guard let details = details else { return }
         let dateInString = details.date.dateToString(format: DateFormat.fullDate)
         let detail = details.records.isEmpty ? nil : details.records[0]
-        detailView.configure(with: dateInString, detail?.book, frameStyle: detail?.frameStyle)
+        detailView.configure(with: dateInString, detail?.book, comment: detail?.comment, frameStyle: detail?.frameStyle)
     }
     
     @objc func backButtonTouched(_ sender: UIBarButtonItem) {
@@ -107,6 +107,8 @@ final class DetailViewController: UIViewController, ViewModelIncludable {
         switch action {
         case .searchButtonTouched:
             viewModel.searchStarted()
+        case .styleSelected(let style):
+            viewModel.newStyleSelected(style)
         }
     }
     
