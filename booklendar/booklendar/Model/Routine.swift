@@ -16,6 +16,11 @@ class Routine {
         self.records = records
     }
     
+    init(date: Date) {
+        self.date = date
+        records = []
+    }
+    
     func main() -> Record {
         return records.min()!
     }

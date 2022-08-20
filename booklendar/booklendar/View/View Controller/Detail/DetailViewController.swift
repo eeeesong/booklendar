@@ -17,6 +17,7 @@ final class DetailViewController: UIViewController, ViewModelIncludable {
                                          style: .plain,
                                          target: self,
                                          action: #selector(backButtonTouched))
+        backButton.tintColor = Colors.menu
         return backButton
     }()
     
@@ -25,6 +26,7 @@ final class DetailViewController: UIViewController, ViewModelIncludable {
                                          style: .plain,
                                          target: self,
                                          action: #selector(editButtonTouched))
+        editButton.tintColor = Colors.menu
         return editButton
     }()
     
@@ -33,6 +35,7 @@ final class DetailViewController: UIViewController, ViewModelIncludable {
                                          style: .plain,
                                          target: self,
                                          action: #selector(doneButtonTouched))
+        doneButton.tintColor = Colors.menu
         return doneButton
     }()
 
@@ -46,7 +49,7 @@ final class DetailViewController: UIViewController, ViewModelIncludable {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setInitialData()
+        updateDetails(with: viewModel?.initialData())
     }
     
     private func configure() {
@@ -73,9 +76,11 @@ final class DetailViewController: UIViewController, ViewModelIncludable {
         navigationItem.rightBarButtonItem = editButton
     }
     
-    private func setInitialData() {
-        guard let details = viewModel?.initialData() else { return }
-        detailView.configure(with: "2021. 10. 24", details.records[0].book)
+    private func updateDetails(with details: Routine?) {
+        guard let details = details else { return }
+        let dateInString = details.date.dateToString(format: DateFormat.fullDate)
+        let detail = details.records.isEmpty ? nil : details.records[0]
+        detailView.configure(with: dateInString, detail?.book, comment: detail?.comment, frameStyle: detail?.frameStyle)
     }
     
     @objc func backButtonTouched(_ sender: UIBarButtonItem) {
@@ -102,6 +107,12 @@ final class DetailViewController: UIViewController, ViewModelIncludable {
         switch action {
         case .searchButtonTouched:
             viewModel.searchStarted()
+        case .styleSelected(let style):
+            viewModel.newStyleSelected(style)
         }
+    }
+    
+    func redraw(with routine: Routine) {
+        updateDetails(with: routine)
     }
 }

@@ -33,6 +33,7 @@ final class SearchViewController: UIViewController, ViewModelIncludable {
     // View Model
     var viewModel: SearchViewModel?
     typealias ViewModel = SearchViewModel
+    var completionHandler: ((Book?) -> ())?
     
     override func loadView() {
         super.loadView()
@@ -73,7 +74,9 @@ final class SearchViewController: UIViewController, ViewModelIncludable {
     func viewNeedsChanges(with action: BookTableAction) {
         switch action {
         case .selectedAt(let indexPath):
-            viewModel?.resultSelected(at: indexPath)
+            let selectedBook = viewModel?.resultSelected(at: indexPath)
+            completionHandler?(selectedBook)
+            navigationController?.popViewController(animated: true)
         }
     }
 }

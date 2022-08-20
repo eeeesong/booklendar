@@ -34,12 +34,14 @@ final class FramedImageView: UIView {
     
     private lazy var frameImageView: UIImageView = {
         let imageView = UIImageView()
+        imageView.contentMode = .scaleToFill
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
     
     private lazy var imageView: UIImageView = {
         let imageView = UIImageView()
+        imageView.contentMode = .scaleToFill
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
@@ -74,6 +76,10 @@ final class FramedImageView: UIView {
     
     func configure(with image: UIImage, style: Style) {
         imageView.image = image
+        frameImageView.image = style.image
+    }
+    
+    func changeStyle(to style: Style) {
         frameImageView.image = style.image
     }
     

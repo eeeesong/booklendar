@@ -60,16 +60,26 @@ final class MonthlyCalendarCollectionViewCell: UICollectionViewCell {
         ])
     }
     
-    func configure(with day: Day, _ imageUrl: String) {
-        let onlyDay = DateFormatter.dateToString(format: DateFormat.onlyDay, date: day.date)
-        dayLabel.text = onlyDay
-        if day.date != nil {
-            let imageName = "book" + String((Int(onlyDay) ?? 0) % 4 + 1)
-            let image = UIImage(named: imageName) ?? UIImage()
-            coverImageView.configure(with: image, style: FramedImageView.Style.random())
-        } else {
+    func configure(with dayRecord: DayRecord) {
+        let day = dayRecord.day
+        guard let realDate = day.date else {
+            dayLabel.text = nil
             coverImageView.reset()
+            return
         }
+        
+        let onlyDay = DateFormatter.dateToString(format: DateFormat.onlyDay, date: realDate)
+        dayLabel.text = onlyDay
         isUserInteractionEnabled = !day.isFuture
+        
+        guard let record = dayRecord.record else {
+            coverImageView.reset()
+            return
+        }
+        
+        let imageUrl = record.book.coverUrl
+        guard let imageData = try? Data(contentsOf: URL(string: imageUrl)!) else { return }
+        let image = UIImage(data: imageData) ?? UIImage()
+        coverImageView.configure(with: image, style: record.frameStyle)
     }
 }

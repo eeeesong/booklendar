@@ -164,13 +164,21 @@ final class CalendarViewController: UIViewController, ViewModelIncludable {
             let newMonth = viewModel.newCalendarNeeded()
             newMonthLoaded(newMonth)
         case .selectedAt(let indexPath):
-            viewModel.calendarCellSelected(at: indexPath)
+            guard let daySelected = calendarDataSource?.sections[indexPath.section][indexPath.row] else { return }
+            viewModel.calendarCellSelected(at: indexPath, dayRecord: daySelected)
         }
     }
 }
 
 extension CalendarViewController: NewStateAcceptable {
     func accept<State>(newState: State) {
-        print(newState)
+        guard let routine = newState as? Routine else { return }
+        
+        viewModel?.new(routine: routine)
+        calendarDataSource?.update(routine)
+        
+        DispatchQueue.main.async {
+            self.monthlyCalendarView.reloadData()
+        }
     }
 }

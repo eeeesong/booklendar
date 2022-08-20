@@ -14,7 +14,8 @@ protocol PopCoordinator: AnyObject {
 
 protocol PushCoordinator: AnyObject {
     associatedtype Info
+    associatedtype Result
     associatedtype Target: UIViewController
     typealias SceneMaker = (Info) -> Target
-    func push(with info: Info, sceneMaker: SceneMaker)
+    func push(with info: Info, sceneMaker: SceneMaker, completionHandler: ((Result?) -> ())?)
 }
